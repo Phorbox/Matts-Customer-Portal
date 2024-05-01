@@ -6,7 +6,7 @@
 //
 //    var workorder = Workorder.FromJson(jsonString);
 
-namespace Models
+namespace backend.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Models
     using R = Newtonsoft.Json.Required;
     using N = Newtonsoft.Json.NullValueHandling;
 
-    public partial class backend.Models
+    public partial class Workorder
     {
         [J("Workorderid")]  public long Workorderid { get; set; }   
         [J("Jobid")]        public long Jobid { get; set; }         

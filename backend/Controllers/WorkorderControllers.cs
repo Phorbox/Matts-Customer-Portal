@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Models
+using backend.Models;
 
 namespace backend.Controllers
 {
@@ -20,9 +20,9 @@ namespace backend.Controllers
                     Clientid = 1,
                     Inputid = 1,
                     Status = "Processing",
-                    DateApproved = new System.DateTime(2020, 1, 1),
-                    DueDate = new System.DateTime(2021, 1, 1),
-                    DateCreated = new System.DateTime(2022, 1, 1)
+                    DateApproved = new System.DateTime(2020, 1, 1).ToString(),
+                    DueDate = new System.DateTime(2021, 1, 1).ToString(),
+                    DateCreated = new System.DateTime(2022, 1, 1).ToString()
                 },
                 new Workorder
                 {
@@ -31,9 +31,9 @@ namespace backend.Controllers
                     Clientid = 1,
                     Inputid = 2,
                     Status = "Pending Approval",
-                    DateApproved = new System.DateTime(2020, 1, 1),
-                    DueDate = new System.DateTime(2021, 1, 1),
-                    DateCreated = new System.DateTime(2022, 1, 1)
+                    DateApproved = new System.DateTime(2020, 1, 1).ToString(),
+                    DueDate = new System.DateTime(2021, 1, 1).ToString(),
+                    DateCreated = new System.DateTime(2022, 1, 1).ToString()
                 },
                 new Workorder
                 {
@@ -42,9 +42,9 @@ namespace backend.Controllers
                     Clientid = 2,
                     Inputid = 3,
                     Status = "Processing",
-                    DateApproved = new System.DateTime(2020, 1, 1),
-                    DueDate = new System.DateTime(2021, 1, 1),
-                    DateCreated = new System.DateTime(2022, 1, 1)
+                    DateApproved = new System.DateTime(2020, 1, 1).ToString(),
+                    DueDate = new System.DateTime(2021, 1, 1).ToString(),
+                    DateCreated = new System.DateTime(2022, 1, 1).ToString()
                 }
             };
 

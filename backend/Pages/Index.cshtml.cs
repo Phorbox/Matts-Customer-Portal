@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using backend.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace backend.Pages;
 
@@ -14,13 +14,13 @@ public class IndexModel : PageModel
 
     public string message = "This message came from the index's model.";
 
-    public void OnGet()
+    public async void OnGet()
     {
         HttpClient client = new HttpClient();
       
 
 
-        var task = client.GetAsync("http://proxy//api/workorder");
+        var task = client.GetAsync("http://proxy/api/workorder");
         HttpResponseMessage response = task.Result;
         List<Workorder> WorkorderList = new List<Workorder>();
         if (response.IsSuccessStatusCode)
