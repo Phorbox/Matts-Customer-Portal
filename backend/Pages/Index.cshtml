@@ -1,14 +1,57 @@
 ﻿@page
+@using backend.Models
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    string message = Model.message;
-    System.Console.WriteLine(message);
+    List<Workorder> workorders = (List<Workorder>) ViewData["WorkorderList"];
 }
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p><a href="./API/workorders">This will take you to the workorders api endoint</a></p>
     <p>@(message)</p>
-    
+
 </div>
+<div class="row" id="content">
+    <div class="col-lg-6">
+        <h3>All Workorders</h3>
+        <ul id="workorder-list"></ul>
+        <button class="btn btn-sm btn-default" id="new">Add New</button>
+    </div>
+</div> *@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Workorders</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Workorder ID</th>
+                        <th>Job ID</th>
+                        <th>Client ID</th>
+                        <th>Input ID</th>
+                        <th>Status</th>
+                        <th>Date Approved</th>
+                        <th>Due Date</th>
+                        <th>Date Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var workorder in workorders)
+                    {
+                        <tr>
+                            <td>@workorder.Workorderid</td>
+                            <td>@workorder.Jobid</td>
+                            <td>@workorder.Clientid</td>
+                            <td>@workorder.Inputid</td>
+                            <td>@workorder.Status</td>
+                            <td>@workorder.DateApproved</td>
+                            <td>@workorder.DueDate</td>
+                            <td>@workorder.DateCreated</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
