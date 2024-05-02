@@ -52,14 +52,14 @@ namespace backend.Common
             using var transaction = connection.BeginTransaction();
 
             using MySqlCommand cmd1 = new MySqlCommand(
-                "DROP TABLE IF EXISTS blog",
+                "DROP TABLE IF EXISTS Workorder",
                 connection,
                 transaction
             );
             cmd1.ExecuteNonQuery();
 
             using MySqlCommand cmd2 = new MySqlCommand(
-                "CREATE TABLE IF NOT EXISTS blog (id int NOT NULL AUTO_INCREMENT, title varchar(255), PRIMARY KEY (id))",
+                "CREATE TABLE IF NOT EXISTS Workorder (Workorderid long NOT NULL AUTO_INCREMENT, Jobid long, Clientid long, Inputid long, Status varchar(255), DateApproved varchar(255), DueDate varchar(255), DateCreated varchar(255), PRIMARY KEY (Workorderid))",
                 connection,
                 transaction
             );
@@ -68,7 +68,7 @@ namespace backend.Common
             for (int i = 0; i < 5; i++)
             {
                 using MySqlCommand insertCommand = new MySqlCommand(
-                    $"INSERT INTO blog (title) VALUES ('Blog post #{i}');",
+                    $"INSERT INTO Workorder (Jobid, Clientid, Inputid, Status, DateApproved, DueDate, DateCreated) VALUES ({i}, {i}, {i}, {i}, 'status', 'date approved', 'due date', 'date created');",
                     connection,
                     transaction
                 );

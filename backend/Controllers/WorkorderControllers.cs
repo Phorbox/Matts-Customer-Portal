@@ -13,6 +13,7 @@ namespace backend.Controllers
     [ApiController]
     public class WorkorderController : ControllerBase
     {
+
         List<Workorder> testWorkorder = new List<Workorder>
         {
             new Workorder
@@ -53,25 +54,33 @@ namespace backend.Controllers
         [HttpGet]
         public List<Workorder> Get()
         {
-            // var results = new List<string>();
-            // using (
-            //     MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
-            // )
-            // {
-            //     connection.Open();
-            //     string sql = "SELECT * FROM Workorder";
-            //     using MySqlCommand cmd = new MySqlCommand(sql, connection);
-            //     using MySqlDataReader reader = cmd.ExecuteReader();
-            //     while (reader.Read())
-            //     {
-            //         string curString = reader.GetString(0);
-            //         results.Add(curString);
-            //     }
-            //     reader.Close();
-            //     connection.Close();
-            // }
-
-            return testWorkorder;
+            var result = new List<Workorder>();
+            using (
+                MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
+            )
+            {
+                connection.Open();
+                string sql = "SELECT * FROM Workorder";
+                using MySqlCommand cmd = new MySqlCommand(sql, connection);
+                using MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(
+                        new Workorder {
+                            Workorderid = reader.GetInt64("Workorderid"),
+                            Jobid = reader.GetInt64("Jobid"),
+                            Clientid = reader.GetInt64("Clientid"),
+                            Inputid = reader.GetInt64("Inputid"),
+                            Status = reader.GetString("Status"),
+                            DateApproved = reader.GetString("DateApproved"),
+                            DueDate = reader.GetString("DueDate"),
+                            DateCreated = reader.GetString("DateCreated")
+                    });
+                }
+                reader.Close();
+                connection.Close();
+            }
+                return result;
         }
 
         [HttpGet("{id}")]
@@ -99,5 +108,7 @@ namespace backend.Controllers
             var workorder = testWorkorder.FirstOrDefault(x => x.Workorderid == id);
             testWorkorder.Remove(workorder);
         }
+
+        
     }
 }
