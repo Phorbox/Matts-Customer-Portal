@@ -6,7 +6,7 @@
 //
 //    var workorder = Workorder.FromJson(jsonString);
 
-namespace backend.Models
+namespace backend.Models.Workorder
 {
     using System;
     using System.Collections.Generic;
@@ -32,12 +32,12 @@ namespace backend.Models
 
     public partial class Workorder
     {
-        public static List<Workorder> FromJson(string json) => JsonConvert.DeserializeObject<List<Workorder>>(json, backend.Models.Converter.Settings);
+        public static List<Workorder> FromJson(string json) => JsonConvert.DeserializeObject<List<Workorder>>(json, backend.Models.Workorder.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<Workorder> self) => JsonConvert.SerializeObject(self, backend.Models.Converter.Settings);
+        public static string ToJson(this List<Workorder> self) => JsonConvert.SerializeObject(self, backend.Models.Workorder.Converter.Settings);
     }
 
     internal static class Converter
@@ -52,4 +52,6 @@ namespace backend.Models
             },
         };
     }
+
+
 }

@@ -1,24 +1,12 @@
 ﻿@page
-@using backend.Models
+@using backend.Models.Piece
+@using backend.Models.Workorder
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    List<Workorder> workorders = (List<Workorder>) ViewData["WorkorderList"];
+    List<Workorder> workorderList = (List<Workorder>) ViewData["WorkorderList"];
+    List<Piece> pieceList = (List<Piece>) ViewData["PieceList"];
 }
-
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p><a href="./API/workorders">This will take you to the workorders api endoint</a></p>
-    <p>@(message)</p>
-
-</div>
-<div class="row" id="content">
-    <div class="col-lg-6">
-        <h3>All Workorders</h3>
-        <ul id="workorder-list"></ul>
-        <button class="btn btn-sm btn-default" id="new">Add New</button>
-    </div>
-</div> *@
 
 <div class="container">
     <div class="row">
@@ -38,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var workorder in workorders)
+                    @foreach (var workorder in workorderList)
                     {
                         <tr>
                             <td>@workorder.Workorderid</td>
@@ -54,4 +42,36 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md-12">
+            <h1 class="text-center">Piece</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Piece ID</th>
+                        <th>Workorder ID</th>
+                        <th>Client ID</th>
+                        <th>Status</th>
+                        <th>Batch Name</th>
+                        <th>Pages</th>
+                        <th>Simplex</th>
+                        <th>Sequence</th>
+                        <th>Retention Start Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var piece in pieceList)
+                    {
+                        <tr>
+                            <td>@piece.Pieceid</td>
+                            <td>@piece.Workorderid</td>
+                            <td>@piece.Clientid</td>
+                            <td>@piece.Status</td>
+                            <td>@piece.BatchName</td>
+                            <td>@piece.Pages</td>
+                            <td>@piece.Simplex</td>
+                            <td>@piece.Sequence</td>
+                            <td>@piece.RetentionStartDay</td>
+                        </tr>
+                    }
+
     </div>

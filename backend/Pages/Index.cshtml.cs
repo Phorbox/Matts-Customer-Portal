@@ -1,4 +1,5 @@
-using backend.Models;
+using backend.Models.Piece;
+using backend.Models.Workorder;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace backend.Pages;
@@ -16,19 +17,34 @@ public class IndexModel : PageModel
 
     public async void OnGet()
     {
-        HttpClient client = new HttpClient();
-      
+        HttpClient WorkorderClient = new HttpClient();
 
-
-        var task = client.GetAsync("http://proxy/api/workorder");
-        HttpResponseMessage response = task.Result;
+        var WorkorderTask = WorkorderClient.GetAsync("http://proxy/api/workorder");
+        HttpResponseMessage WorkorderResponse = WorkorderTask.Result;
         List<Workorder> WorkorderList = new List<Workorder>();
-        if (response.IsSuccessStatusCode)
+        if (WorkorderResponse.IsSuccessStatusCode)
         {
-            Task<string> data = response.Content.ReadAsStringAsync();
-            string jsonString = data.Result;
+            Task<string> WorkorderData = WorkorderResponse.Content.ReadAsStringAsync();
+            string jsonString = WorkorderData.Result;
             WorkorderList = Workorder.FromJson(jsonString);
         }
         ViewData["WorkorderList"] = WorkorderList;
+        WorkorderClient.Dispose();
+
+        HttpClient PieceClient = new HttpClient();
+
+        var PieceTask = PieceClient.GetAsync("http://proxy/api/piece");
+        HttpResponseMessage PieceResponse = PieceTask.Result;
+        List<Piece> PieceList = new List<Piece>();
+        if (PieceResponse.IsSuccessStatusCode)
+        {
+            Task<string> PieceData = PieceResponse.Content.ReadAsStringAsync();
+            string jsonString = PieceData.Result;
+            PieceList = Piece.FromJson(jsonString);
+        }
+        ViewData["PieceList"] = PieceList;
+        //ViewData["PieceList"] = "PieceList";
+        // PieceClient.Dispose();
+
     }
 }
