@@ -29,7 +29,7 @@ public class IndexModel : PageModel
             WorkorderList = Workorder.FromJson(jsonString);
         }
         ViewData["WorkorderList"] = WorkorderList;
-        WorkorderClient.Dispose();
+        // WorkorderClient.Dispose();
 
         HttpClient PieceClient = new HttpClient();
 
@@ -43,7 +43,6 @@ public class IndexModel : PageModel
             PieceList = Piece.FromJson(jsonString);
         }
         ViewData["PieceList"] = PieceList;
-        //ViewData["PieceList"] = "PieceList";
         // PieceClient.Dispose();
 
     }

@@ -4,8 +4,8 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    List<Workorder> workorderList = (List<Workorder>) ViewData["WorkorderList"];
-    List<Piece> pieceList = (List<Piece>) ViewData["PieceList"];
+    List<Workorder> workorderList = (List<Workorder>)ViewData["WorkorderList"];
+    List<Piece> pieceList = (List<Piece>)ViewData["PieceList"];
 }
 
 <div class="container">
@@ -73,5 +73,7 @@
                             <td>@piece.RetentionStartDay</td>
                         </tr>
                     }
-
+                </tbody>
+            </table>
+        </div>
     </div>
