@@ -1,5 +1,6 @@
 services:
   backend:
+    container_name: dotnet-container
     build:
       context: backend
     secrets:
@@ -12,6 +13,7 @@ services:
 
   db:
     image: mysql:8
+    container_name: mysql-container
     command: "--default-authentication-plugin=mysql_native_password"
     restart: always
     healthcheck:
@@ -28,31 +30,33 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=example
+      - MYSQL_DATABASE=main
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
       # - MYSQL_USER=db_user
       # - MYSQL_PASSWORD=db_user_pass
 
-
   proxy:
+    container_name: nginx-container
     build: proxy
     ports:
       - 80:80
     depends_on:
       - backend
 
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   container_name: pma
-  #   links:
-  #     - db
-  #   environment:
-  #     PMA_HOST: db
-  #     PMA_PORT: 3306
-  #     PMA_ARBITRARY: 1
-  #   restart: always
-  #   ports:
-  #     - 8081:80
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: db-q5n2g
+      PMA_ROOT_PASSWORD: db-q5n2g
+    restart: always
+    ports:
+      - 1234:80
 
 volumes:
   db-data:
