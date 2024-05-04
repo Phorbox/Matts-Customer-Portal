@@ -10,7 +10,7 @@ namespace backend.Common
     {
         public static string password = File.ReadAllText("/run/secrets/db-password");
         public static string connectionString =
-            $"server=db;user=root;database=example;port=3306;password={password}";
+            $"server=db;user=root;database=main;port=3306;password={password}";
 
         
 
