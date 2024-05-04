@@ -5,35 +5,23 @@ services:
       context: backend
     secrets:
       - db-password
-    depends_on:
-      db:
-        condition: service_healthy
     environment:
       - ASPNETCORE_URLS=http://+:8000
 
   db:
-    image: mysql:8
+    image: mysql
     container_name: mysql-container
-    command: "--default-authentication-plugin=mysql_native_password"
     restart: always
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          'mysqladmin ping -h 127.0.0.1 --password="$$(cat /run/secrets/db-password)" --silent',
-        ]
-      interval: 3s
-      retries: 5
-      start_period: 30s
     secrets:
       - db-password
     volumes:
+      - ./db/schema:/docker-entrypoint-initdb.d
       - db-data:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=main
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
-      # - MYSQL_USER=db_user
-      # - MYSQL_PASSWORD=db_user_pass
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=db_user_pass
 
   proxy:
     container_name: nginx-container
@@ -51,9 +39,8 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: db-q5n2g
-      PMA_ROOT_PASSWORD: db-q5n2g
+      PMA_USER: db_user
+      PMA_PASSWORD: db_user_pass
     restart: always
     ports:
       - 1234:80
