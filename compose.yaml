@@ -5,6 +5,8 @@ services:
       context: backend
     secrets:
       - db-password
+    volumes:
+      - ./backend/JSON:/JSON
     environment:
       - ASPNETCORE_URLS=http://+:8000
 

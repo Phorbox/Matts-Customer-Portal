@@ -14,42 +14,8 @@ namespace backend.Controllers
     public class WorkorderController : ControllerBase
     {
 
-        List<Workorder> testWorkorder = new List<Workorder>
-        {
-            new Workorder
-            {
-                Workorderid = 1,
-                Jobid = 1,
-                Clientid = 1,
-                Inputid = 1,
-                Status = "Processing",
-                DateApproved = new System.DateTime(2020, 1, 1).ToString(),
-                DueDate = new System.DateTime(2021, 1, 1).ToString(),
-                DateCreated = new System.DateTime(2022, 1, 1).ToString()
-            },
-            new Workorder
-            {
-                Workorderid = 2,
-                Jobid = 2,
-                Clientid = 1,
-                Inputid = 2,
-                Status = "Pending Approval",
-                DateApproved = new System.DateTime(2020, 1, 1).ToString(),
-                DueDate = new System.DateTime(2021, 1, 1).ToString(),
-                DateCreated = new System.DateTime(2022, 1, 1).ToString()
-            },
-            new Workorder
-            {
-                Workorderid = 3,
-                Jobid = 1,
-                Clientid = 2,
-                Inputid = 3,
-                Status = "Processing",
-                DateApproved = new System.DateTime(2020, 1, 1).ToString(),
-                DueDate = new System.DateTime(2021, 1, 1).ToString(),
-                DateCreated = new System.DateTime(2022, 1, 1).ToString()
-            }
-        };
+        static string jsonString = System.IO.File.ReadAllText("../JSON/Workorder.json");
+        List<Workorder> testWorkorder = Workorder.FromJson(jsonString);
 
         [HttpGet]
         public List<Workorder> Get()

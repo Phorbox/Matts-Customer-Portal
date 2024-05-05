@@ -1,0 +1,112 @@
+[
+  {
+    "pieceid": "1",
+    "workorderid": "1",
+    "clientid": "1",
+    "Status": "Approved",
+    "Batch Name": "batch1",
+    "Pages": "1",
+    "Simplex": "",
+    "sequence": "1",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "2",
+    "workorderid": "1",
+    "clientid": "1",
+    "Status": "Approved",
+    "Batch Name": "batch1",
+    "Pages": "1",
+    "Simplex": "",
+    "sequence": "2",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "3",
+    "workorderid": "1",
+    "clientid": "1",
+    "Status": "Approved",
+    "Batch Name": "batch1",
+    "Pages": "1",
+    "Simplex": "",
+    "sequence": "3",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "4",
+    "workorderid": "1",
+    "clientid": "1",
+    "Status": "Approved",
+    "Batch Name": "batch2",
+    "Pages": "2",
+    "Simplex": "",
+    "sequence": "1",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "5",
+    "workorderid": "1",
+    "clientid": "1",
+    "Status": "Approved",
+    "Batch Name": "batch2",
+    "Pages": "2",
+    "Simplex": "",
+    "sequence": "2",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "6",
+    "workorderid": "2",
+    "clientid": "2",
+    "Status": "Rejected",
+    "Batch Name": "pulls",
+    "Pages": "1",
+    "Simplex": "TRUE",
+    "sequence": "1",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "7",
+    "workorderid": "2",
+    "clientid": "2",
+    "Status": "Approved",
+    "Batch Name": "batchf",
+    "Pages": "6",
+    "Simplex": "TRUE",
+    "sequence": "1",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "8",
+    "workorderid": "2",
+    "clientid": "2",
+    "Status": "Approved",
+    "Batch Name": "batch1",
+    "Pages": "1",
+    "Simplex": "",
+    "sequence": "2",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "9",
+    "workorderid": "2",
+    "clientid": "2",
+    "Status": "Approved",
+    "Batch Name": "batch2",
+    "Pages": "2",
+    "Simplex": "",
+    "sequence": "1",
+    "Retention Start Day": "4/30/24"
+  },
+  {
+    "pieceid": "10",
+    "workorderid": "2",
+    "clientid": "2",
+    "Status": "Approved",
+    "Batch Name": "batch2",
+    "Pages": "2",
+    "Simplex": "",
+    "sequence": "2",
+    "Retention Start Day": "4/30/24"
+  }
+]
