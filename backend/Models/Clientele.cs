@@ -25,16 +25,7 @@ namespace backend.Models.Clientele
         [J("Retention Length")][JsonConverter(typeof(ParseStringConverter))] public long RetentionLength { get; set; }
         [J("sladuedate")][JsonConverter(typeof(ParseStringConverter))]       public long Sladuedate { get; set; }     
         [J("parentid")]                                                      public string Parentid { get; set; }     
-        [J("childids")]                                                      public Childids Childids { get; set; }   
-    }
-
-    public partial struct Childids
-    {
-        public List<long> IntegerArray;
-        public string String;
-
-        public static implicit operator Childids(List<long> IntegerArray) => new Childids { IntegerArray = IntegerArray };
-        public static implicit operator Childids(string String) => new Childids { String = String };
+        [J("childids")]                                                      public List<long> Childids { get; set; } 
     }
 
     public partial class Clientele
@@ -55,7 +46,6 @@ namespace backend.Models.Clientele
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                ChildidsConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
@@ -90,43 +80,5 @@ namespace backend.Models.Clientele
         }
 
         public static readonly ParseStringConverter Singleton = new ParseStringConverter();
-    }
-
-    internal class ChildidsConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(Childids) || t == typeof(Childids?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
-            {
-                case JsonToken.String:
-                case JsonToken.Date:
-                    var stringValue = serializer.Deserialize<string>(reader);
-                    return new Childids { String = stringValue };
-                case JsonToken.StartArray:
-                    var arrayValue = serializer.Deserialize<List<long>>(reader);
-                    return new Childids { IntegerArray = arrayValue };
-            }
-            throw new Exception("Cannot unmarshal type Childids");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            var value = (Childids)untypedValue;
-            if (value.String != null)
-            {
-                serializer.Serialize(writer, value.String);
-                return;
-            }
-            if (value.IntegerArray != null)
-            {
-                serializer.Serialize(writer, value.IntegerArray);
-                return;
-            }
-            throw new Exception("Cannot marshal type Childids");
-        }
-
-        public static readonly ChildidsConverter Singleton = new ChildidsConverter();
     }
 }

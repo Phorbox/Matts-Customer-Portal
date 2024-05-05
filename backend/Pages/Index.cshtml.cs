@@ -1,3 +1,5 @@
+using backend.Models.Clientele;
+using backend.Models.Job;
 using backend.Models.Piece;
 using backend.Models.Workorder;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -45,5 +47,34 @@ public class IndexModel : PageModel
         ViewData["PieceList"] = PieceList;
         // PieceClient.Dispose();
 
+        HttpClient ClienteleClient = new HttpClient();
+
+        var ClienteleTask = ClienteleClient.GetAsync("http://proxy/api/clientele");
+        HttpResponseMessage ClienteleResponse = ClienteleTask.Result;
+        List<Clientele> ClienteleList = new List<Clientele>();
+        if (ClienteleResponse.IsSuccessStatusCode)
+        {
+            Task<string> ClienteleData = ClienteleResponse.Content.ReadAsStringAsync();
+            string jsonString = ClienteleData.Result;
+            ClienteleList = Clientele.FromJson(jsonString);
+        }
+        ViewData["ClienteleList"] = ClienteleList;
+        // ClienteleClient.Dispose();
+
+        HttpClient JobClient = new HttpClient();
+
+        var JobTask = JobClient.GetAsync("http://proxy/api/job");
+        HttpResponseMessage JobResponse = JobTask.Result;
+        List<Job> JobList = new List<Job>();
+        if (JobResponse.IsSuccessStatusCode)
+        {
+            Task<string> JobData = JobResponse.Content.ReadAsStringAsync();
+            string jsonString = JobData.Result;
+            JobList = Job.FromJson(jsonString);
+        }
+        ViewData["JobList"] = JobList;
+        // JobClient.Dispose();
+
+        
     }
 }

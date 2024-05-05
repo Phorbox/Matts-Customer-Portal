@@ -1,11 +1,16 @@
 ﻿@page
 @using backend.Models.Piece
 @using backend.Models.Workorder
+@using backend.Models.Clientele
+@using backend.Models.Job
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
     List<Workorder> workorderList = (List<Workorder>)ViewData["WorkorderList"];
     List<Piece> pieceList = (List<Piece>)ViewData["PieceList"];
+    List<Clientele> clienteleList = (List<Clientele>)ViewData["ClienteleList"];
+    List<Job> jobList = (List<Job>)ViewData["JobList"];
+
 }
 
 <div class="container">
@@ -76,4 +81,62 @@
                 </tbody>
             </table>
         </div>
-    </div>
+        <div class="col-md-12">
+            <h1 class="text-center">Clientele</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Clientid</th>
+                        <th>Name</th>
+                        <th>RetentionLength</th>
+                        <th>Sladuedate</th>
+                        <th>Parentid</th>
+                        <th>childids</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var clientele in clienteleList)
+                    {
+                        <tr>
+                            <td>@clientele.Clientid</td>
+                            <td>@clientele.Name</td>
+                            <td>@clientele.RetentionLength</td>
+                            <td>@clientele.Sladuedate</td>
+                            <td>@clientele.Parentid</td>
+                            @foreach (var child in clientele.Childids)
+                            {
+                                <td>@child</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <h1 class="text-center">Job</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Job ID</th>
+                        <th>Job Name</th>
+                        <th>Client ID</th>
+                        <th>SLA Overide</th>
+                        <th>Approval</th>
+                        <th>CustomPostage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var job in jobList)
+                    {
+                        <tr>
+                            <td>@job.Jobid</td>
+                            <td>@job.Name</td>
+                            <td>@job.Clientid</td>
+                            <td>@job.SlaOveride</td>
+                            <td>@job.Approval</td>
+                            <td>@job.CustomPostage</td>
+                        </tr>
+                    }
+
+            </table>
+        </div>

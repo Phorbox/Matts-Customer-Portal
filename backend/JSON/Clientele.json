@@ -5,7 +5,7 @@
       "Retention Length": "120",
       "sladuedate": "24",
       "parentid": "",
-      "childids": ""
+      "childids": []
     },
     {
       "clientid": "2",
@@ -13,7 +13,7 @@
       "Retention Length": "10",
       "sladuedate": "48",
       "parentid": "",
-      "childids": ""
+      "childids": []
     },
     {
       "clientid": "3",
@@ -21,7 +21,7 @@
       "Retention Length": "90",
       "sladuedate": "48",
       "parentid": "",
-      "childids": ""
+      "childids": []
     },
     {
       "clientid": "4",
@@ -37,7 +37,7 @@
       "Retention Length": "90",
       "sladuedate": "48",
       "parentid": "4",
-      "childids": ""
+      "childids": []
     },
     {
       "clientid": "6",
@@ -45,6 +45,6 @@
       "Retention Length": "90",
       "sladuedate": "48",
       "parentid": "4",
-      "childids": ""
+      "childids": []
     }
   ]
