@@ -19,6 +19,19 @@ public class IndexModel : PageModel
 
     public async void OnGet()
     {
+        // HttpClient WorkorderClient = new HttpClient();
+        // Workorder postTest = testWorkorder[0];
+        // var WorkorderTask = WorkorderClient.PostAsync("http://proxy/api/workorder",);
+        // HttpResponseMessage WorkorderResponse = WorkorderTask.Result;
+        // List<Workorder> WorkorderList = new List<Workorder>();
+        // if (WorkorderResponse.IsSuccessStatusCode)
+        // {
+        //     Task<string> WorkorderData = WorkorderResponse.Content.ReadAsStringAsync();
+        //     string jsonString = WorkorderData.Result;
+        //     WorkorderList = Workorder.FromJson(jsonString);
+        // }
+        // ViewData["WorkorderList"] = WorkorderList;
+
         HttpClient WorkorderClient = new HttpClient();
 
         var WorkorderTask = WorkorderClient.GetAsync("http://proxy/api/workorder");

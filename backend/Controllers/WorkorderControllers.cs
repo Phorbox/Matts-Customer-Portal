@@ -38,18 +38,16 @@ namespace backend.Controllers
                             Clientid = reader.GetInt64("Clientid"),
                             Inputid = reader.GetInt64("Inputid"),
                             Status = reader.GetString("Status"),
-                            // DateApproved = reader.GetDateTime("DateApproved").h ? "" : reader.GetDateTime("DateApproved").ToString(), // Convert DateTime to string
-                            // DueDate = reader.GetDateTime("DueDate").Equals(DBNull.Value) ? "" : reader.GetDateTime("DueDate").ToString(),
-                            // DateCreated = reader.GetDateTime("DateCreated").Equals(DBNull.Value) ? "" : reader.GetDateTime("DateCreated").ToString()
-                            DateApproved = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DateApproved")))
+                            DateApproved = Convert.IsDBNull(
+                                reader.GetValue(reader.GetOrdinal("DateApproved"))
+                            )
                                 ? null
                                 : reader.GetDateTime("DateApproved"), // Convert DateTime to string
-                            DueDate = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DueDate")))
+                            DueDate = Convert.IsDBNull(
+                                reader.GetValue(reader.GetOrdinal("DueDate"))
+                            )
                                 ? null
                                 : reader.GetDateTime("DueDate"), // Convert DateTime to string
-                            // DateCreated = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DateCreated")))
-                            //     ? null
-                            //     : reader.GetDateTime("DateCreated"), // Convert DateTime to string
                             DateCreated = reader.GetDateTime("DateCreated")
                         }
                     );
@@ -63,13 +61,67 @@ namespace backend.Controllers
         [HttpGet("{id}")]
         public Workorder Get(int id)
         {
-            return testWorkorder.FirstOrDefault(x => x.Workorderid == id);
+            var result = new Workorder();
+            using (
+                MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
+            )
+            {
+                connection.Open();
+                string sql = $"SELECT * FROM Workorder WHERE `Workorderid` = {id}";
+                using MySqlCommand cmd = new MySqlCommand(sql, connection);
+                using MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+
+                result = new Workorder
+                {
+                    Workorderid = reader.GetInt64("Workorderid"),
+                    Jobid = reader.GetInt64("Jobid"),
+                    Clientid = reader.GetInt64("Clientid"),
+                    Inputid = reader.GetInt64("Inputid"),
+                    Status = reader.GetString("Status"),
+                    DateApproved = Convert.IsDBNull(
+                        reader.GetValue(reader.GetOrdinal("DateApproved"))
+                    )
+                        ? null
+                        : reader.GetDateTime("DateApproved"), // Convert DateTime to string
+                    DueDate = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DueDate")))
+                        ? null
+                        : reader.GetDateTime("DueDate"), // Convert DateTime to string
+                    DateCreated = reader.GetDateTime("DateCreated")
+                };
+
+                reader.Close();
+                connection.Close();
+            }
+            return result;
         }
 
         [HttpPost]
-        public void Post([FromBody] Workorder workorder)
+        public int Post([FromBody] Workorder workorder)
         {
-            testWorkorder.Add(workorder);
+            String insertValues = $"{workorder.Jobid}, {workorder.Clientid}, {workorder.Inputid}";
+            String sql =
+                $"INSERT INTO Workorder (Jobid, Clientid, Inputid) VALUES ({insertValues}))";
+            // try
+            // {
+            //     using (
+            //         MySqlConnection connection = new MySqlConnection(
+            //             CommonConnection.connectionString
+            //         )
+            //     )
+            //     {
+            //         connection.Open();
+            //         using MySqlCommand cmd = new MySqlCommand(sql, connection);
+            //         cmd.ExecuteNonQuery();
+            //         connection.Close();
+            //     }
+            // }
+            // catch (Exception e)
+            // {
+            //     return 0;
+            // }
+
+            return 1;
         }
 
         [HttpPut("{id}")]
