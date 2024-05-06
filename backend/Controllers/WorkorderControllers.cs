@@ -13,7 +13,6 @@ namespace backend.Controllers
     [ApiController]
     public class WorkorderController : ControllerBase
     {
-
         static string jsonString = System.IO.File.ReadAllText("../JSON/Workorder.json");
         List<Workorder> testWorkorder = Workorder.FromJson(jsonString);
 
@@ -32,21 +31,33 @@ namespace backend.Controllers
                 while (reader.Read())
                 {
                     result.Add(
-                        new Workorder {
+                        new Workorder
+                        {
                             Workorderid = reader.GetInt64("Workorderid"),
                             Jobid = reader.GetInt64("Jobid"),
                             Clientid = reader.GetInt64("Clientid"),
                             Inputid = reader.GetInt64("Inputid"),
                             Status = reader.GetString("Status"),
-                            DateApproved = reader.GetString("DateApproved"),
-                            DueDate = reader.GetString("DueDate"),
-                            DateCreated = reader.GetString("DateCreated")
-                    });
+                            // DateApproved = reader.GetDateTime("DateApproved").h ? "" : reader.GetDateTime("DateApproved").ToString(), // Convert DateTime to string
+                            // DueDate = reader.GetDateTime("DueDate").Equals(DBNull.Value) ? "" : reader.GetDateTime("DueDate").ToString(),
+                            // DateCreated = reader.GetDateTime("DateCreated").Equals(DBNull.Value) ? "" : reader.GetDateTime("DateCreated").ToString()
+                            DateApproved = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DateApproved")))
+                                ? null
+                                : reader.GetDateTime("DateApproved"), // Convert DateTime to string
+                            DueDate = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DueDate")))
+                                ? null
+                                : reader.GetDateTime("DueDate"), // Convert DateTime to string
+                            // DateCreated = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DateCreated")))
+                            //     ? null
+                            //     : reader.GetDateTime("DateCreated"), // Convert DateTime to string
+                            DateCreated = reader.GetDateTime("DateCreated")
+                        }
+                    );
                 }
                 reader.Close();
                 connection.Close();
             }
-                return result;
+            return result;
         }
 
         [HttpGet("{id}")]
@@ -74,7 +85,5 @@ namespace backend.Controllers
             var workorder = testWorkorder.FirstOrDefault(x => x.Workorderid == id);
             testWorkorder.Remove(workorder);
         }
-
-        
     }
 }

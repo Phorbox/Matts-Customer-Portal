@@ -25,9 +25,11 @@ namespace backend.Models.Workorder
         [J("Clientid")]     public long Clientid { get; set; }      
         [J("Inputid")]      public long Inputid { get; set; }       
         [J("Status")]       public string Status { get; set; }      
-        [J("DateApproved")] public string DateApproved { get; set; }
-        [J("DueDate")]      public string DueDate { get; set; }     
-        [J("DateCreated")]  public string DateCreated { get; set; } 
+        #nullable enable
+        [J("DateApproved")]  public DateTime? DateApproved { get; set; }
+        [J("DueDate")]      public DateTime? DueDate { get; set; }     
+        #nullable disable
+        [J("DateCreated")]  public DateTime DateCreated { get; set; } 
     }
 
     public partial class Workorder

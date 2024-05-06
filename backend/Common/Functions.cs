@@ -12,8 +12,6 @@ namespace backend.Common
         public static string connectionString =
             $"server=db;user=root;database=main;port=3306;password={password}";
 
-        
-
         public static List<string> GetTitles()
         {
             var titles = new List<string>();
@@ -83,7 +81,7 @@ namespace backend.Common
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
             using var transaction = connection.BeginTransaction();
-            
+
             using MySqlCommand cmd = new MySqlCommand(
                 $"INSERT INTO ({table}) VALUES ({stuffToInsert.ToString()})",
                 connection,
@@ -137,7 +135,6 @@ namespace backend.Common
             {
                 string curString = reader.GetString(0);
                 results.Add(curString);
-                 
             }
             reader.Close();
             connection.Close();
@@ -145,6 +142,16 @@ namespace backend.Common
             return results;
         }
 
-
+        public static T ConvertFromDBVal<T>(object obj)
+        {
+            if (obj == null || obj == DBNull.Value)
+            {
+                return default(T); // returns the default value for the type
+            }
+            else
+            {
+                return (T)obj;
+            }
+        }
     }
 }
