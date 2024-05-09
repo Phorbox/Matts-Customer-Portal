@@ -1,7 +1,7 @@
 [
   {
     "pieceid": "1",
-    "workorderid": "1",
+    "jobid": "1",
     "clientid": "1",
     "Status": "Approved",
     "Batch Name": "batch1",
@@ -12,7 +12,7 @@
   },
   {
     "pieceid": "2",
-    "workorderid": "1",
+    "jobid": "1",
     "clientid": "1",
     "Status": "Approved",
     "Batch Name": "batch1",
@@ -23,7 +23,7 @@
   },
   {
     "pieceid": "3",
-    "workorderid": "1",
+    "jobid": "1",
     "clientid": "1",
     "Status": "Approved",
     "Batch Name": "batch1",
@@ -34,7 +34,7 @@
   },
   {
     "pieceid": "4",
-    "workorderid": "1",
+    "jobid": "1",
     "clientid": "1",
     "Status": "Approved",
     "Batch Name": "batch2",
@@ -45,7 +45,7 @@
   },
   {
     "pieceid": "5",
-    "workorderid": "1",
+    "jobid": "1",
     "clientid": "1",
     "Status": "Approved",
     "Batch Name": "batch2",
@@ -56,7 +56,7 @@
   },
   {
     "pieceid": "6",
-    "workorderid": "2",
+    "jobid": "2",
     "clientid": "2",
     "Status": "Rejected",
     "Batch Name": "pulls",
@@ -67,7 +67,7 @@
   },
   {
     "pieceid": "7",
-    "workorderid": "2",
+    "jobid": "2",
     "clientid": "2",
     "Status": "Approved",
     "Batch Name": "batchf",
@@ -78,7 +78,7 @@
   },
   {
     "pieceid": "8",
-    "workorderid": "2",
+    "jobid": "2",
     "clientid": "2",
     "Status": "Approved",
     "Batch Name": "batch1",
@@ -89,7 +89,7 @@
   },
   {
     "pieceid": "9",
-    "workorderid": "2",
+    "jobid": "2",
     "clientid": "2",
     "Status": "Approved",
     "Batch Name": "batch2",
@@ -100,7 +100,7 @@
   },
   {
     "pieceid": "10",
-    "workorderid": "2",
+    "jobid": "2",
     "clientid": "2",
     "Status": "Approved",
     "Batch Name": "batch2",

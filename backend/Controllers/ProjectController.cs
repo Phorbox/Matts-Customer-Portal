@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Common;
-using backend.Models.Job;
+using backend.Models.Project;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
@@ -11,13 +11,13 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobController : ControllerBase
+    public class ProjectController : ControllerBase
     {
-        static readonly string jsonString = System.IO.File.ReadAllText("../JSON/Job.json");
-        readonly List<Job> testJob = Job.FromJson(jsonString);
+        static readonly string jsonString = System.IO.File.ReadAllText("../JSON/Project.json");
+        readonly List<Project> testProject = Project.FromJson(jsonString);
 
         [HttpGet]
-        public List<Job> Get()
+        public List<Project> Get()
         {
             Console.WriteLine(jsonString);
             // var results = new List<string>();
@@ -26,7 +26,7 @@ namespace backend.Controllers
             // )
             // {
             //     connection.Open();
-            //     string sql = "SELECT * FROM Job";
+            //     string sql = "SELECT * FROM Project";
             //     using MySqlCommand cmd = new MySqlCommand(sql, connection);
             //     using MySqlDataReader reader = cmd.ExecuteReader();
             //     while (reader.Read())
@@ -38,33 +38,33 @@ namespace backend.Controllers
             //     connection.Close();
             // }
 
-            return testJob;
+            return testProject;
         }
 
         [HttpGet("{id}")]
-        public Job Get(int id)
+        public Project Get(int id)
         {
-            return testJob.FirstOrDefault(x => x.Clientid == id);
+            return testProject.FirstOrDefault(x => x.Clientid == id);
         }
 
         [HttpPost]
-        public void Post([FromBody] Job piece)
+        public void Post([FromBody] Project piece)
         {
-            testJob.Add(piece);
+            testProject.Add(piece);
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Job piece)
+        public void Put(int id, [FromBody] Project piece)
         {
-            var index = testJob.FindIndex(x => x.Clientid == id);
-            testJob[index] = piece;
+            var index = testProject.FindIndex(x => x.Clientid == id);
+            testProject[index] = piece;
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var piece = testJob.FirstOrDefault(x => x.Clientid == id);
-            testJob.Remove(piece);
+            var piece = testProject.FirstOrDefault(x => x.Clientid == id);
+            testProject.Remove(piece);
         }
     }
 }

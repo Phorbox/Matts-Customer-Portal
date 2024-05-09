@@ -1,0 +1,51 @@
+Usio Output Solutions Portal:
+  - Customer Portal:
+      - Short Term:
+          - 1 month
+          - Approvals:
+              - Approve/Reject/Overnight at the piece or job level
+          - Billing
+            - Reporting
+          - Work Order Portal
+          - User Management
+          - IP Restriction/2fa
+
+      - Mid Term:
+          - Document Manager
+          - Retention
+
+      - Long Term:
+          - Document Submission (API and Web)
+          - Auto Processing
+          - Reprocessing
+
+Technologies:
+  - ASP Dotnet:
+      - MySqlConnector
+      - Razor Pages
+  - Docker Containers
+  - Azure:
+      - Container Registry
+      - Storage Accounts/Blob Storage
+      - Container apps
+  - Mysql
+
+Goals:
+  - maintainable:
+      - Technologies that corporate uses
+      - Inhouse/No black boxes
+
+  - Scalable:
+      - Azure
+      - Docker
+
+  - Bespoke:
+      - Customized to the needs of billing and print processor
+
+  - Transparent:
+      - Azure pricing
+      - Retention
+
+  - Existing Resources:
+      - FTP Sites
+      - Mysql DB

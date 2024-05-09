@@ -2,7 +2,10 @@ server {
     listen       80;
     server_name  localhost;
     location / {
-        proxy_pass   http://backend:8000;
+        proxy_pass   http://front:8000;
+    }
+    location /api/ {
+        proxy_pass   http://api:8000;
     }
 
 

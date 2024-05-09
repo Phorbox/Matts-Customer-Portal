@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Common;
-using backend.Models.Workorder;
+using backend.Models.Job;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
@@ -11,30 +11,30 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WorkorderController : ControllerBase
+    public class JobController : ControllerBase
     {
-        static string jsonString = System.IO.File.ReadAllText("../JSON/Workorder.json");
-        List<Workorder> testWorkorder = Workorder.FromJson(jsonString);
+        static string jsonString = System.IO.File.ReadAllText("../JSON/Job.json");
+        List<Job> testJob = Job.FromJson(jsonString);
 
         [HttpGet]
-        public List<Workorder> Get()
+        public List<Job> Get()
         {
-            var result = new List<Workorder>();
+            var result = new List<Job>();
             using (
                 MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
             )
             {
                 connection.Open();
-                string sql = "SELECT * FROM Workorder";
+                string sql = "SELECT * FROM Job";
                 using MySqlCommand cmd = new MySqlCommand(sql, connection);
                 using MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     result.Add(
-                        new Workorder
+                        new Job
                         {
-                            Workorderid = reader.GetInt64("Workorderid"),
                             Jobid = reader.GetInt64("Jobid"),
+                            Projectid = reader.GetInt64("Projectid"),
                             Clientid = reader.GetInt64("Clientid"),
                             Inputid = reader.GetInt64("Inputid"),
                             Status = reader.GetString("Status"),
@@ -59,23 +59,23 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public Workorder Get(int id)
+        public Job Get(int id)
         {
-            var result = new Workorder();
+            var result = new Job();
             using (
                 MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
             )
             {
                 connection.Open();
-                string sql = $"SELECT * FROM Workorder WHERE `Workorderid` = {id}";
+                string sql = $"SELECT * FROM Job WHERE `Jobid` = {id}";
                 using MySqlCommand cmd = new MySqlCommand(sql, connection);
                 using MySqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
 
-                result = new Workorder
+                result = new Job
                 {
-                    Workorderid = reader.GetInt64("Workorderid"),
                     Jobid = reader.GetInt64("Jobid"),
+                    Projectid = reader.GetInt64("Projectid"),
                     Clientid = reader.GetInt64("Clientid"),
                     Inputid = reader.GetInt64("Inputid"),
                     Status = reader.GetString("Status"),
@@ -97,11 +97,11 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public int Post([FromBody] Workorder workorder)
+        public int Post([FromBody] Job job)
         {
-            String insertValues = $"{workorder.Jobid}, {workorder.Clientid}, {workorder.Inputid}";
+            String insertValues = $"{job.Projectid}, {job.Clientid}, {job.Inputid}";
             String sql =
-                $"INSERT INTO Workorder (Jobid, Clientid, Inputid) VALUES ({insertValues}))";
+                $"INSERT INTO Job (Projectid, Clientid, Inputid) VALUES ({insertValues}))";
             // try
             // {
             //     using (
@@ -125,17 +125,17 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Workorder workorder)
+        public void Put(int id, [FromBody] Job job)
         {
-            var index = testWorkorder.FindIndex(x => x.Workorderid == id);
-            testWorkorder[index] = workorder;
+            var index = testJob.FindIndex(x => x.Jobid == id);
+            testJob[index] = job;
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var workorder = testWorkorder.FirstOrDefault(x => x.Workorderid == id);
-            testWorkorder.Remove(workorder);
+            var job = testJob.FirstOrDefault(x => x.Jobid == id);
+            testJob.Remove(job);
         }
     }
 }

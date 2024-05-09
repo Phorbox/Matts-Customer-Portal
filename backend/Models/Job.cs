@@ -2,7 +2,7 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using backend.Models.Jobs;
+//    using QuickType;
 //
 //    var job = Job.FromJson(jsonString);
 
@@ -20,12 +20,16 @@ namespace backend.Models.Job
 
     public partial class Job
     {
-        [J("jobid")][JsonConverter(typeof(ParseStringConverter))]    public long Jobid { get; set; }          
-        [J("name")]                                                  public string Name { get; set; }         
-        [J("clientid")][JsonConverter(typeof(ParseStringConverter))] public long Clientid { get; set; }       
-        [J("SLAOveride")]                                            public string SlaOveride { get; set; }   
-        [J("Approval")]                                              public string Approval { get; set; }     
-        [J("CustomPostage")]                                         public string CustomPostage { get; set; }
+        [J("Jobid")]  public long Jobid { get; set; }   
+        [J("Projectid")]        public long Projectid { get; set; }         
+        [J("Clientid")]     public long Clientid { get; set; }      
+        [J("Inputid")]      public long Inputid { get; set; }       
+        [J("Status")]       public string Status { get; set; }      
+        #nullable enable
+        [J("DateApproved")]  public DateTime? DateApproved { get; set; }
+        [J("DueDate")]      public DateTime? DueDate { get; set; }     
+        #nullable disable
+        [J("DateCreated")]  public DateTime DateCreated { get; set; } 
     }
 
     public partial class Job
@@ -51,34 +55,5 @@ namespace backend.Models.Job
         };
     }
 
-    internal class ParseStringConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
 
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            long l;
-            if (Int64.TryParse(value, out l))
-            {
-                return l;
-            }
-            throw new Exception("Cannot unmarshal type long");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (long)untypedValue;
-            serializer.Serialize(writer, value.ToString());
-            return;
-        }
-
-        public static readonly ParseStringConverter Singleton = new ParseStringConverter();
-    }
 }

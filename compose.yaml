@@ -1,6 +1,17 @@
 services:
-  backend:
-    container_name: dotnet-container
+  front:
+    container_name: front-container
+    build:
+      context: backend
+    secrets:
+      - db-password
+    volumes:
+      - ./backend/JSON:/JSON
+    environment:
+      - ASPNETCORE_URLS=http://+:8000
+
+  api:
+    container_name: api-container
     build:
       context: backend
     secrets:
@@ -31,7 +42,8 @@ services:
     ports:
       - 80:80
     depends_on:
-      - backend
+      - front
+      - api
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

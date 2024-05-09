@@ -1,7 +1,7 @@
 using backend.Models.Clientele;
-using backend.Models.Job;
+using backend.Models.Project;
 using backend.Models.Piece;
-using backend.Models.Workorder;
+using backend.Models.Job;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace backend.Pages;
@@ -15,36 +15,34 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public string message = "This message came from the index's model.";
-
     public async void OnGet()
     {
-        // HttpClient WorkorderClient = new HttpClient();
-        // Workorder postTest = testWorkorder[0];
-        // var WorkorderTask = WorkorderClient.PostAsync("http://proxy/api/workorder",);
-        // HttpResponseMessage WorkorderResponse = WorkorderTask.Result;
-        // List<Workorder> WorkorderList = new List<Workorder>();
-        // if (WorkorderResponse.IsSuccessStatusCode)
+        // HttpClient JobClient = new HttpClient();
+        // Job postTest = testJob[0];
+        // var JobTask = JobClient.PostAsync("http://proxy/api/job",);
+        // HttpResponseMessage JobResponse = JobTask.Result;
+        // List<Job> JobList = new List<Job>();
+        // if (JobResponse.IsSuccessStatusCode)
         // {
-        //     Task<string> WorkorderData = WorkorderResponse.Content.ReadAsStringAsync();
-        //     string jsonString = WorkorderData.Result;
-        //     WorkorderList = Workorder.FromJson(jsonString);
+        //     Task<string> JobData = JobResponse.Content.ReadAsStringAsync();
+        //     string jsonString = JobData.Result;
+        //     JobList = Job.FromJson(jsonString);
         // }
-        // ViewData["WorkorderList"] = WorkorderList;
+        // ViewData["JobList"] = JobList;
 
-        HttpClient WorkorderClient = new HttpClient();
+        HttpClient JobClient = new HttpClient();
 
-        var WorkorderTask = WorkorderClient.GetAsync("http://proxy/api/workorder");
-        HttpResponseMessage WorkorderResponse = WorkorderTask.Result;
-        List<Workorder> WorkorderList = new List<Workorder>();
-        if (WorkorderResponse.IsSuccessStatusCode)
+        var JobTask = JobClient.GetAsync("http://proxy/api/job");
+        HttpResponseMessage JobResponse = JobTask.Result;
+        List<Job> JobList = new List<Job>();
+        if (JobResponse.IsSuccessStatusCode)
         {
-            Task<string> WorkorderData = WorkorderResponse.Content.ReadAsStringAsync();
-            string jsonString = WorkorderData.Result;
-            WorkorderList = Workorder.FromJson(jsonString);
+            Task<string> JobData = JobResponse.Content.ReadAsStringAsync();
+            string jsonString = JobData.Result;
+            JobList = Job.FromJson(jsonString);
         }
-        ViewData["WorkorderList"] = WorkorderList;
-        // WorkorderClient.Dispose();
+        ViewData["JobList"] = JobList;
+        // JobClient.Dispose();
 
         HttpClient PieceClient = new HttpClient();
 
@@ -74,19 +72,19 @@ public class IndexModel : PageModel
         ViewData["ClienteleList"] = ClienteleList;
         // ClienteleClient.Dispose();
 
-        HttpClient JobClient = new HttpClient();
+        HttpClient ProjectClient = new HttpClient();
 
-        var JobTask = JobClient.GetAsync("http://proxy/api/job");
-        HttpResponseMessage JobResponse = JobTask.Result;
-        List<Job> JobList = new List<Job>();
-        if (JobResponse.IsSuccessStatusCode)
+        var ProjectTask = ProjectClient.GetAsync("http://proxy/api/project");
+        HttpResponseMessage ProjectResponse = ProjectTask.Result;
+        List<Project> ProjectList = new List<Project>();
+        if (ProjectResponse.IsSuccessStatusCode)
         {
-            Task<string> JobData = JobResponse.Content.ReadAsStringAsync();
-            string jsonString = JobData.Result;
-            JobList = Job.FromJson(jsonString);
+            Task<string> ProjectData = ProjectResponse.Content.ReadAsStringAsync();
+            string jsonString = ProjectData.Result;
+            ProjectList = Project.FromJson(jsonString);
         }
-        ViewData["JobList"] = JobList;
-        // JobClient.Dispose();
+        ViewData["ProjectList"] = ProjectList;
+        // ProjectClient.Dispose();
 
         
     }

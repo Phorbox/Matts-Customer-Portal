@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using backend.Models.Piece;
+//    using backend.Models.Projects;
 //
-//    var piece = Piece.FromJson(jsonString);
+//    var project = Project.FromJson(jsonString);
 
-namespace backend.Models.Piece
+namespace backend.Models.Project
 {
     using System;
     using System.Collections.Generic;
@@ -18,27 +18,24 @@ namespace backend.Models.Piece
     using R = Newtonsoft.Json.Required;
     using N = Newtonsoft.Json.NullValueHandling;
 
-    public partial class Piece
+    public partial class Project
     {
-        [J("pieceid")][JsonConverter(typeof(ParseStringConverter))]     public long Pieceid { get; set; }            
-        [J("jobid")][JsonConverter(typeof(ParseStringConverter))] public long Jobid { get; set; }        
-        [J("clientid")][JsonConverter(typeof(ParseStringConverter))]    public long Clientid { get; set; }           
-        [J("Status")]                                                   public string Status { get; set; }           
-        [J("Batch Name")]                                               public string BatchName { get; set; }        
-        [J("Pages")][JsonConverter(typeof(ParseStringConverter))]       public long Pages { get; set; }              
-        [J("Simplex")]                                                  public string Simplex { get; set; }          
-        [J("sequence")][JsonConverter(typeof(ParseStringConverter))]    public long Sequence { get; set; }           
-        [J("Retention Start Day")]                                      public string RetentionStartDay { get; set; }
+        [J("projectid")][JsonConverter(typeof(ParseStringConverter))]    public long Projectid { get; set; }          
+        [J("name")]                                                  public string Name { get; set; }         
+        [J("clientid")][JsonConverter(typeof(ParseStringConverter))] public long Clientid { get; set; }       
+        [J("SLAOveride")]                                            public string SlaOveride { get; set; }   
+        [J("Approval")]                                              public string Approval { get; set; }     
+        [J("CustomPostage")]                                         public string CustomPostage { get; set; }
     }
 
-    public partial class Piece
+    public partial class Project
     {
-        public static List<Piece> FromJson(string json) => JsonConvert.DeserializeObject<List<Piece>>(json, backend.Models.Piece.Converter.Settings);
+        public static List<Project> FromJson(string json) => JsonConvert.DeserializeObject<List<Project>>(json, backend.Models.Project.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<Piece> self) => JsonConvert.SerializeObject(self, backend.Models.Piece.Converter.Settings);
+        public static string ToJson(this List<Project> self) => JsonConvert.SerializeObject(self, backend.Models.Project.Converter.Settings);
     }
 
     internal static class Converter

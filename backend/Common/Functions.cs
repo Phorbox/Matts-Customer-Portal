@@ -8,9 +8,17 @@ namespace backend.Common
 {
     public static class CommonConnection
     {
-        public static string password = File.ReadAllText("/run/secrets/db-password");
+        // public static string password = File.ReadAllText("/run/secrets/db-password");
+        public static string password = "db-q5n2g";
         public static string connectionString =
             $"server=db;user=root;database=main;port=3306;password={password}";
+        // public static string server = "outputsolutionsportaldb";
+        // public static string user = "mattsmakingademo";
+        // public static string database = "main"; 
+        // public static string port = "3306";
+        // public static string password = "oNVYAXFp1JsRzDpHin0U";
+        // public static string connectionString =
+        //     $"server={server};user={user};database={database};port={port};password={password}";
 
         public static List<string> GetTitles()
         {
@@ -50,14 +58,14 @@ namespace backend.Common
             using var transaction = connection.BeginTransaction();
 
             using MySqlCommand cmd1 = new MySqlCommand(
-                "DROP TABLE IF EXISTS Workorder",
+                "DROP TABLE IF EXISTS Job",
                 connection,
                 transaction
             );
             cmd1.ExecuteNonQuery();
 
             using MySqlCommand cmd2 = new MySqlCommand(
-                "CREATE TABLE IF NOT EXISTS Workorder (Workorderid long NOT NULL AUTO_INCREMENT, Jobid long, Clientid long, Inputid long, Status varchar(255), DateApproved varchar(255), DueDate varchar(255), DateCreated varchar(255), PRIMARY KEY (Workorderid))",
+                "CREATE TABLE IF NOT EXISTS Job (Jobid long NOT NULL AUTO_INCREMENT, Projectid long, Clientid long, Inputid long, Status varchar(255), DateApproved varchar(255), DueDate varchar(255), DateCreated varchar(255), PRIMARY KEY (Jobid))",
                 connection,
                 transaction
             );
@@ -66,7 +74,7 @@ namespace backend.Common
             for (int i = 0; i < 5; i++)
             {
                 using MySqlCommand insertCommand = new MySqlCommand(
-                    $"INSERT INTO Workorder (Jobid, Clientid, Inputid, Status, DateApproved, DueDate, DateCreated) VALUES ({i}, {i}, {i}, {i}, 'status', 'date approved', 'due date', 'date created');",
+                    $"INSERT INTO Job (Projectid, Clientid, Inputid, Status, DateApproved, DueDate, DateCreated) VALUES ({i}, {i}, {i}, {i}, 'status', 'date approved', 'due date', 'date created');",
                     connection,
                     transaction
                 );

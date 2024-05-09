@@ -1,27 +1,27 @@
 ﻿@page
 @using backend.Models.Piece
-@using backend.Models.Workorder
-@using backend.Models.Clientele
 @using backend.Models.Job
+@using backend.Models.Clientele
+@using backend.Models.Project
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    List<Workorder> workorderList = (List<Workorder>)ViewData["WorkorderList"];
+    List<Job> jobList = (List<Job>)ViewData["JobList"];
     List<Piece> pieceList = (List<Piece>)ViewData["PieceList"];
     List<Clientele> clienteleList = (List<Clientele>)ViewData["ClienteleList"];
-    List<Job> jobList = (List<Job>)ViewData["JobList"];
+    List<Project> projectList = (List<Project>)ViewData["ProjectList"];
 
 }
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Workorders</h1>
+            <h1 class="text-center">Jobs</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Workorder ID</th>
                         <th>Job ID</th>
+                        <th>Project ID</th>
                         <th>Client ID</th>
                         <th>Input ID</th>
                         <th>Status</th>
@@ -31,17 +31,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var workorder in workorderList)
+                    @foreach (var job in jobList)
                     {
                         <tr>
-                            <td>@workorder.Workorderid</td>
-                            <td>@workorder.Jobid</td>
-                            <td>@workorder.Clientid</td>
-                            <td>@workorder.Inputid</td>
-                            <td>@workorder.Status</td>
-                            <td>@workorder.DateApproved</td>
-                            <td>@workorder.DueDate</td>
-                            <td>@workorder.DateCreated</td>
+                            <td>@job.Jobid</td>
+                            <td>@job.Projectid</td>
+                            <td>@job.Clientid</td>
+                            <td>@job.Inputid</td>
+                            <td>@job.Status</td>
+                            <td>@job.DateApproved</td>
+                            <td>@job.DueDate</td>
+                            <td>@job.DateCreated</td>
                         </tr>
                     }
                 </tbody>
@@ -53,7 +53,7 @@
                 <thead>
                     <tr>
                         <th>Piece ID</th>
-                        <th>Workorder ID</th>
+                        <th>Job ID</th>
                         <th>Client ID</th>
                         <th>Status</th>
                         <th>Batch Name</th>
@@ -68,7 +68,7 @@
                     {
                         <tr>
                             <td>@piece.Pieceid</td>
-                            <td>@piece.Workorderid</td>
+                            <td>@piece.Jobid</td>
                             <td>@piece.Clientid</td>
                             <td>@piece.Status</td>
                             <td>@piece.BatchName</td>
@@ -113,12 +113,12 @@
             </table>
         </div>
         <div class="col-md-12">
-            <h1 class="text-center">Job</h1>
+            <h1 class="text-center">Project</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Job ID</th>
-                        <th>Job Name</th>
+                        <th>Project ID</th>
+                        <th>Project Name</th>
                         <th>Client ID</th>
                         <th>SLA Overide</th>
                         <th>Approval</th>
@@ -126,15 +126,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var job in jobList)
+                    @foreach (var project in projectList)
                     {
                         <tr>
-                            <td>@job.Jobid</td>
-                            <td>@job.Name</td>
-                            <td>@job.Clientid</td>
-                            <td>@job.SlaOveride</td>
-                            <td>@job.Approval</td>
-                            <td>@job.CustomPostage</td>
+                            <td>@project.Projectid</td>
+                            <td>@project.Name</td>
+                            <td>@project.Clientid</td>
+                            <td>@project.SlaOveride</td>
+                            <td>@project.Approval</td>
+                            <td>@project.CustomPostage</td>
                         </tr>
                     }
 

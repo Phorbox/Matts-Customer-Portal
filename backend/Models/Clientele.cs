@@ -23,9 +23,10 @@ namespace backend.Models.Clientele
         [J("clientid")][JsonConverter(typeof(ParseStringConverter))]         public long Clientid { get; set; }       
         [J("name")]                                                          public string Name { get; set; }         
         [J("Retention Length")][JsonConverter(typeof(ParseStringConverter))] public long RetentionLength { get; set; }
-        [J("sladuedate")][JsonConverter(typeof(ParseStringConverter))]       public long Sladuedate { get; set; }     
-        [J("parentid")]                                                      public string Parentid { get; set; }     
-        [J("childids")]                                                      public List<long> Childids { get; set; } 
+        [J("sladuedate")][JsonConverter(typeof(ParseStringConverter))]       public long Sladuedate { get; set; }
+        #nullable enable     
+        [J("parentid")]                                                      public long? Parentid { get; set; }     
+        [J("childids")]                                                      public List<long>? Childids { get; set; } 
     }
 
     public partial class Clientele

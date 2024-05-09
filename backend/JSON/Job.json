@@ -1,34 +1,52 @@
 [
     {
-      "jobid": "1",
-      "name": "statements",
-      "clientid": "1",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Jobid": "1",
+      "Projectid": "1",
+      "Clientid": "1",
+      "Inputid": "1",
+      "Status": "Processing",
+      "DateApproved": "1/1/2020",
+      "DueDate": "2/2/2021",
+      "DateCreated": "3/3/2022"
     },
     {
-      "jobid": "2",
-      "name": "dq",
-      "clientid": "1",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Jobid": "2",
+      "Projectid": "2",
+      "Clientid": "1",
+      "Inputid": "2",
+      "Status": "Pending Approval",
+      "DateApproved": "1/1/2020",
+      "DueDate": "2/2/2021",
+      "DateCreated": "3/3/2022"
     },
     {
-      "jobid": "3",
-      "name": "letters",
-      "clientid": "2",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Jobid": "3",
+      "Projectid": "1",
+      "Clientid": "2",
+      "Inputid": "3",
+      "Status": "Processing",
+      "DateApproved": "1/1/2020",
+      "DueDate": "2/2/2021",
+      "DateCreated": "3/3/2022"
     },
     {
-      "jobid": "4",
-      "name": "notices",
-      "clientid": "2",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Jobid": "4",
+      "Projectid": "2",
+      "Clientid": "2",
+      "Inputid": "4",
+      "Status": "Pending Approval",
+      "DateApproved": "1/1/2020",
+      "DueDate": "2/2/2021",
+      "DateCreated": "3/3/2022"
+    },
+    {
+      "Jobid": "5",
+      "Projectid": "1",
+      "Clientid": "3",
+      "Inputid": "5",
+      "Status": "Processing",
+      "DateApproved": "1/1/2020",
+      "DueDate": "2/2/2021",
+      "DateCreated": "3/3/2022"
     }
   ]
