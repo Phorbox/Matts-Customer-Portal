@@ -3,6 +3,7 @@
 @using backend.Models.Job
 @using backend.Models.Clientele
 @using backend.Models.Project
+@using System.Reflection
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -20,28 +21,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Job ID</th>
-                        <th>Project ID</th>
-                        <th>Client ID</th>
-                        <th>Input ID</th>
-                        <th>Status</th>
-                        <th>Date Approved</th>
-                        <th>Due Date</th>
-                        <th>Date Created</th>
+                        @foreach (PropertyInfo prop in typeof(Job).GetProperties())
+                        {
+                            <th>@prop.Name</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var job in jobList)
                     {
                         <tr>
-                            <td>@job.Jobid</td>
-                            <td>@job.Projectid</td>
-                            <td>@job.Clientid</td>
-                            <td>@job.Inputid</td>
-                            <td>@job.Status</td>
-                            <td>@job.DateApproved</td>
-                            <td>@job.DueDate</td>
-                            <td>@job.DateCreated</td>
+                            @foreach (PropertyInfo prop in typeof(Job).GetProperties())
+                            {
+                                <td>@prop.GetValue(job)</td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -52,30 +45,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Piece ID</th>
-                        <th>Job ID</th>
-                        <th>Client ID</th>
-                        <th>Status</th>
-                        <th>Batch Name</th>
-                        <th>Pages</th>
-                        <th>Simplex</th>
-                        <th>Sequence</th>
-                        <th>Retention Start Day</th>
+                        @foreach (PropertyInfo prop in typeof(Piece).GetProperties())
+                        {
+                            <th>@prop.Name</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var piece in pieceList)
                     {
                         <tr>
-                            <td>@piece.Pieceid</td>
-                            <td>@piece.Jobid</td>
-                            <td>@piece.Clientid</td>
-                            <td>@piece.Status</td>
-                            <td>@piece.BatchName</td>
-                            <td>@piece.Pages</td>
-                            <td>@piece.Simplex</td>
-                            <td>@piece.Sequence</td>
-                            <td>@piece.RetentionStartDay</td>
+                            @foreach (PropertyInfo prop in typeof(Piece).GetProperties())
+                            {
+                                <td>@prop.GetValue(piece)</td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -86,26 +69,19 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Clientid</th>
-                        <th>Name</th>
-                        <th>RetentionLength</th>
-                        <th>Sladuedate</th>
-                        <th>Parentid</th>
-                        <th>childids</th>
+                        @foreach (PropertyInfo prop in typeof(Clientele).GetProperties())
+                        {
+                            <th>@prop.Name</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var clientele in clienteleList)
                     {
                         <tr>
-                            <td>@clientele.Clientid</td>
-                            <td>@clientele.Name</td>
-                            <td>@clientele.RetentionLength</td>
-                            <td>@clientele.Sladuedate</td>
-                            <td>@clientele.Parentid</td>
-                            @foreach (var child in clientele.Childids)
+                            @foreach (PropertyInfo prop in typeof(Clientele).GetProperties())
                             {
-                                <td>@child</td>
+                                <td>@prop.GetValue(clientele)</td>
                             }
                         </tr>
                     }
@@ -117,24 +93,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Project ID</th>
-                        <th>Project Name</th>
-                        <th>Client ID</th>
-                        <th>SLA Overide</th>
-                        <th>Approval</th>
-                        <th>CustomPostage</th>
+                        @foreach (PropertyInfo prop in typeof(Project).GetProperties())
+                        {
+                            <th>@prop.Name</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var project in projectList)
                     {
                         <tr>
-                            <td>@project.Projectid</td>
-                            <td>@project.Name</td>
-                            <td>@project.Clientid</td>
-                            <td>@project.SlaOveride</td>
-                            <td>@project.Approval</td>
-                            <td>@project.CustomPostage</td>
+                            @foreach (PropertyInfo prop in typeof(Project).GetProperties())
+                            {
+                                <td>@prop.GetValue(project)</td>
+                            }
                         </tr>
                     }
 

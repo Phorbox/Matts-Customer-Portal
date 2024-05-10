@@ -2,7 +2,7 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using backend.Models.Job;
 //
 //    var job = Job.FromJson(jsonString);
 
@@ -20,16 +20,26 @@ namespace backend.Models.Job
 
     public partial class Job
     {
-        [J("Jobid")]  public long Jobid { get; set; }   
-        [J("Projectid")]        public long Projectid { get; set; }         
-        [J("Clientid")]     public long Clientid { get; set; }      
-        [J("Inputid")]      public long Inputid { get; set; }       
-        [J("Status")]       public string Status { get; set; }      
-        #nullable enable
-        [J("DateApproved")]  public DateTime? DateApproved { get; set; }
-        [J("DueDate")]      public DateTime? DueDate { get; set; }     
-        #nullable disable
-        [J("DateCreated")]  public DateTime DateCreated { get; set; } 
+        #nullable enable     
+        [J("Jobid")]            public long? Jobid { get; set; }                
+        [J("Projectid")]        public long? Projectid { get; set; }            
+        [J("Clienteleid")]      public long? Clienteleid { get; set; }          
+        [J("Inputid")]          public long? Inputid { get; set; }              
+        [J("Status")]           public string? Status { get; set; }             
+        [J("DateApproved")]     public DateTime? DateApproved { get; set; }  
+        [J("DueDate")]          public DateTime? DueDate { get; set; }   
+        [J("DateCreated")]      public DateTime? DateCreated { get; set; }
+        [J("ProjectName")]      public string? ProjectName { get; set; }        
+        [J("SlaOveride")]       public long? SlaOveride { get; set; }         
+        [J("Approval")]         public string? Approval { get; set; }           
+        [J("ClienteleName")]    public string? ClienteleName { get; set; }      
+        [J("RetentionLength")]  public long? RetentionLength { get; set; }      
+        [J("SlaDueDate")]       public long? SlaDueDate { get; set; }           
+        [J("ParentId")]         public long? ParentId { get; set; }    
+        [J("Filename")]         public string? Filename { get; set; }           
+        [J("StoragePriority")] public string? StoragePriority { get; set; }    
+        [J("InputPDF")]         public string? InputPdf { get; set; }           
+        #nullable disable       
     }
 
     public partial class Job
@@ -54,6 +64,4 @@ namespace backend.Models.Job
             },
         };
     }
-
-
 }

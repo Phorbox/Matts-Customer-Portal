@@ -1,50 +1,44 @@
 [
     {
-      "clientid": "1",
-      "name": "Corpus Christi",
-      "Retention Length": "120",
-      "sladuedate": "24",
-      "parentid": "",
-      "childids": []
+      "Clienteleid": 1,
+      "ClienteleName": "Corpus Christi",
+      "RetentionLength": 120,
+      "SlaDueDate": 24,
+      "ParentId": null
     },
     {
-      "clientid": "2",
-      "name": "Southernpine",
-      "Retention Length": "10",
-      "sladuedate": "48",
-      "parentid": "",
-      "childids": []
+      "Clienteleid": 2,
+      "ClienteleName": "Southernpine",
+      "RetentionLength": 10,
+      "SlaDueDate": 48,
+      "ParentId": null
     },
     {
-      "clientid": "3",
-      "name": "Texas Water",
-      "Retention Length": "90",
-      "sladuedate": "48",
-      "parentid": "",
-      "childids": []
+      "Clienteleid": 3,
+      "ClienteleName": "Texas Water",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": null
     },
     {
-      "clientid": "4",
-      "name": "Linebarger",
-      "Retention Length": "90",
-      "sladuedate": "48",
-      "parentid": "",
-      "childids": [5,6]
+      "Clienteleid": 4,
+      "ClienteleName": "Linebarger",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": null
     },
     {
-      "clientid": "5",
-      "name": "I66 Toll",
-      "Retention Length": "90",
-      "sladuedate": "48",
-      "parentid": "4",
-      "childids": []
+      "Clienteleid": 5,
+      "ClienteleName": "I66 Toll",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": 4
     },
     {
-      "clientid": "6",
-      "name": "Parking Lot Tolls",
-      "Retention Length": "90",
-      "sladuedate": "48",
-      "parentid": "4",
-      "childids": []
+      "Clienteleid": 6,
+      "ClienteleName": "Parking Lot Tolls",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": 4
     }
   ]

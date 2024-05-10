@@ -2,7 +2,7 @@
   {
     "pieceid": "1",
     "jobid": "1",
-    "clientid": "1",
+    "clienteleid": "1",
     "Status": "Approved",
     "Batch Name": "batch1",
     "Pages": "1",
@@ -13,7 +13,7 @@
   {
     "pieceid": "2",
     "jobid": "1",
-    "clientid": "1",
+    "clienteleid": "1",
     "Status": "Approved",
     "Batch Name": "batch1",
     "Pages": "1",
@@ -24,7 +24,7 @@
   {
     "pieceid": "3",
     "jobid": "1",
-    "clientid": "1",
+    "clienteleid": "1",
     "Status": "Approved",
     "Batch Name": "batch1",
     "Pages": "1",
@@ -35,7 +35,7 @@
   {
     "pieceid": "4",
     "jobid": "1",
-    "clientid": "1",
+    "clienteleid": "1",
     "Status": "Approved",
     "Batch Name": "batch2",
     "Pages": "2",
@@ -46,7 +46,7 @@
   {
     "pieceid": "5",
     "jobid": "1",
-    "clientid": "1",
+    "clienteleid": "1",
     "Status": "Approved",
     "Batch Name": "batch2",
     "Pages": "2",
@@ -57,7 +57,7 @@
   {
     "pieceid": "6",
     "jobid": "2",
-    "clientid": "2",
+    "clienteleid": "2",
     "Status": "Rejected",
     "Batch Name": "pulls",
     "Pages": "1",
@@ -68,7 +68,7 @@
   {
     "pieceid": "7",
     "jobid": "2",
-    "clientid": "2",
+    "clienteleid": "2",
     "Status": "Approved",
     "Batch Name": "batchf",
     "Pages": "6",
@@ -79,7 +79,7 @@
   {
     "pieceid": "8",
     "jobid": "2",
-    "clientid": "2",
+    "clienteleid": "2",
     "Status": "Approved",
     "Batch Name": "batch1",
     "Pages": "1",
@@ -90,7 +90,7 @@
   {
     "pieceid": "9",
     "jobid": "2",
-    "clientid": "2",
+    "clienteleid": "2",
     "Status": "Approved",
     "Batch Name": "batch2",
     "Pages": "2",
@@ -101,7 +101,7 @@
   {
     "pieceid": "10",
     "jobid": "2",
-    "clientid": "2",
+    "clienteleid": "2",
     "Status": "Approved",
     "Batch Name": "batch2",
     "Pages": "2",

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Common;
+using backend.Models.Clientele;
 using backend.Models.Job;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
@@ -25,32 +27,18 @@ namespace backend.Controllers
             )
             {
                 connection.Open();
-                string sql = "SELECT * FROM Job";
+                string sql =
+                    @"  
+                        SELECT *
+                        FROM Job
+                        JOIN Project ON Job.Projectid = Project.Projectid
+                        JOIN Clientele ON Job.Clienteleid = Clientele.Clienteleid
+                        JOIN Input ON Job.Inputid = Input.Inputid;";
                 using MySqlCommand cmd = new MySqlCommand(sql, connection);
                 using MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    result.Add(
-                        new Job
-                        {
-                            Jobid = reader.GetInt64("Jobid"),
-                            Projectid = reader.GetInt64("Projectid"),
-                            Clientid = reader.GetInt64("Clientid"),
-                            Inputid = reader.GetInt64("Inputid"),
-                            Status = reader.GetString("Status"),
-                            DateApproved = Convert.IsDBNull(
-                                reader.GetValue(reader.GetOrdinal("DateApproved"))
-                            )
-                                ? null
-                                : reader.GetDateTime("DateApproved"), // Convert DateTime to string
-                            DueDate = Convert.IsDBNull(
-                                reader.GetValue(reader.GetOrdinal("DueDate"))
-                            )
-                                ? null
-                                : reader.GetDateTime("DueDate"), // Convert DateTime to string
-                            DateCreated = reader.GetDateTime("DateCreated")
-                        }
-                    );
+                    result.Add(ConvertReaderToJob(reader));
                 }
                 reader.Close();
                 connection.Close();
@@ -67,28 +55,21 @@ namespace backend.Controllers
             )
             {
                 connection.Open();
-                string sql = $"SELECT * FROM Job WHERE `Jobid` = {id}";
+
+                string sql =
+                    $@"  
+                        SELECT *
+                        FROM Job
+                        JOIN Project ON Job.Projectid = Project.Projectid
+                        JOIN Clientele ON Job.Clienteleid = Clientele.Clienteleid
+                        JOIN Input ON Job.Inputid = Input.Inputid
+                        WHERE `Jobid` = {id};";
+
                 using MySqlCommand cmd = new MySqlCommand(sql, connection);
                 using MySqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
 
-                result = new Job
-                {
-                    Jobid = reader.GetInt64("Jobid"),
-                    Projectid = reader.GetInt64("Projectid"),
-                    Clientid = reader.GetInt64("Clientid"),
-                    Inputid = reader.GetInt64("Inputid"),
-                    Status = reader.GetString("Status"),
-                    DateApproved = Convert.IsDBNull(
-                        reader.GetValue(reader.GetOrdinal("DateApproved"))
-                    )
-                        ? null
-                        : reader.GetDateTime("DateApproved"), // Convert DateTime to string
-                    DueDate = Convert.IsDBNull(reader.GetValue(reader.GetOrdinal("DueDate")))
-                        ? null
-                        : reader.GetDateTime("DueDate"), // Convert DateTime to string
-                    DateCreated = reader.GetDateTime("DateCreated")
-                };
+                result = ConvertReaderToJob(reader);
 
                 reader.Close();
                 connection.Close();
@@ -97,29 +78,52 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public int Post([FromBody] Job job)
+        public int Post([FromBody] string body)
         {
-            String insertValues = $"{job.Projectid}, {job.Clientid}, {job.Inputid}";
-            String sql =
-                $"INSERT INTO Job (Projectid, Clientid, Inputid) VALUES ({insertValues}))";
-            // try
-            // {
-            //     using (
-            //         MySqlConnection connection = new MySqlConnection(
-            //             CommonConnection.connectionString
-            //         )
-            //     )
-            //     {
-            //         connection.Open();
-            //         using MySqlCommand cmd = new MySqlCommand(sql, connection);
-            //         cmd.ExecuteNonQuery();
-            //         connection.Close();
-            //     }
-            // }
-            // catch (Exception e)
-            // {
-            //     return 0;
-            // }
+            Job job = Job.FromJson(body)[0];
+            if (job.ClienteleName != null)
+            {
+                 HttpClient ClienteleClient = new HttpClient();
+                var ClienteleTask = ClienteleClient.GetAsync("http://proxy/api/clientele");
+                HttpResponseMessage ClienteleResponse = ClienteleTask.Result;
+                List<Clientele> ClienteleList = new List<Clientele>();
+                if (ClienteleResponse.IsSuccessStatusCode)
+                {
+                    Task<string> ClienteleData = ClienteleResponse.Content.ReadAsStringAsync();
+                    string jsonString = ClienteleData.Result;
+                    ClienteleList = Clientele.FromJson(jsonString);
+                    job.Clienteleid = ClienteleList.FirstOrDefault(x => x.ClienteleName == job.ClienteleName).Clienteleid;
+                }
+            }
+
+            string jobSql =
+                @$"
+                INSERT INTO Job
+                (
+                    Projectid,
+                    Clienteleid,
+                    Inputid,
+                )
+                VALUES
+                (
+                    {job.Projectid},
+                    {job.Clienteleid},
+                    {job.Inputid}
+                );";
+
+            string InputSql =
+                @$"
+                INSERT INTO Input
+                (
+                    Filename,
+                    StoragePriority,
+                    InputPdf
+                )
+                VALUES
+                (
+                    '{job.Filename}',
+                    '{job.InputPdf}'
+                );";
 
             return 1;
         }
@@ -136,6 +140,32 @@ namespace backend.Controllers
         {
             var job = testJob.FirstOrDefault(x => x.Jobid == id);
             testJob.Remove(job);
+        }
+
+        private static Job ConvertReaderToJob(MySqlDataReader reader)
+        {
+            Job job = new Job();
+
+            job.Jobid = reader.GetInt64("Jobid");
+            job.Projectid = reader.GetInt64("Projectid");
+            job.Clienteleid = reader.GetInt64("Clienteleid");
+            job.Inputid = reader.GetInt64("Inputid");
+            job.Status = reader.GetString("Status");
+            job.DateApproved = CommonConnection.getNullableDate(reader, "DateApproved");
+            job.DueDate = CommonConnection.getNullableDate(reader, "DueDate");
+            job.DateCreated = reader.GetDateTime("DateCreated");
+            job.ProjectName = reader.GetString("ProjectName");
+            job.SlaOveride = CommonConnection.getNullableLong(reader, "SlaOveride");
+            job.Approval = CommonConnection.getNullableString(reader, "Approval");
+            job.ClienteleName = reader.GetString("ClienteleName");
+            job.RetentionLength = reader.GetInt64("RetentionLength");
+            job.SlaDueDate = reader.GetInt64("SlaDueDate");
+            job.ParentId = CommonConnection.getNullableLong(reader, "ParentId");
+            job.Filename = reader.GetString("Filename");
+            job.StoragePriority = reader.GetString("StoragePriority");
+            // job.InputPdf = reader.GetString("InputPdf");
+            job.InputPdf = null;
+            return job;
         }
     }
 }

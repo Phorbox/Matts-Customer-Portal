@@ -1,34 +1,46 @@
 [
     {
-      "projectid": "1",
-      "name": "statements",
-      "clientid": "1",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Projectid": 1,
+      "ProjectName": "statements",
+      "Clienteleid": 1,
+      "SlaOveride": null,
+      "Approval": null,
+      "ClienteleName": "Corpus Christi",
+      "RetentionLength": 120,
+      "SlaDueDate": 24,
+      "ParentId": null
     },
     {
-      "projectid": "2",
-      "name": "dq",
-      "clientid": "1",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Projectid": 2,
+      "ProjectName": "dq",
+      "Clienteleid": 1,
+      "SlaOveride": null,
+      "Approval": null,
+      "ClienteleName": "Corpus Christi",
+      "RetentionLength": 120,
+      "SlaDueDate": 24,
+      "ParentId": null
     },
     {
-      "projectid": "3",
-      "name": "letters",
-      "clientid": "2",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Projectid": 3,
+      "ProjectName": "letters",
+      "Clienteleid": 2,
+      "SlaOveride": 20,
+      "Approval": "Approval",
+      "ClienteleName": "Corpus Christi",
+      "RetentionLength": 120,
+      "SlaDueDate": 24,
+      "ParentId": 1
     },
     {
-      "projectid": "4",
-      "name": "notices",
-      "clientid": "2",
-      "SLAOveride": "",
-      "Approval": "",
-      "CustomPostage": ""
+      "Projectid": 4,
+      "ProjectName": "notices",
+      "Clienteleid": 2,
+      "SlaOveride": null,
+      "Approval": "Overnight",
+      "ClienteleName": "Corpus Christi",
+      "RetentionLength": 120,
+      "SlaDueDate": 24,
+      "ParentId": 2
     }
   ]

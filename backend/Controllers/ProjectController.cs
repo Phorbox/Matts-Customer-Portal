@@ -19,32 +19,35 @@ namespace backend.Controllers
         [HttpGet]
         public List<Project> Get()
         {
-            Console.WriteLine(jsonString);
-            // var results = new List<string>();
-            // using (
-            //     MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
-            // )
-            // {
-            //     connection.Open();
-            //     string sql = "SELECT * FROM Project";
-            //     using MySqlCommand cmd = new MySqlCommand(sql, connection);
-            //     using MySqlDataReader reader = cmd.ExecuteReader();
-            //     while (reader.Read())
-            //     {
-            //         string curString = reader.GetString(0);
-            //         results.Add(curString);
-            //     }
-            //     reader.Close();
-            //     connection.Close();
-            // }
+            var result = new List<Project>();
+            using (
+                MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
+            )
+            {
+                connection.Open();
+                string sql =
+                    @"  
+                        SELECT *
+                        FROM Project
+                        Join Clientele ON Project.Clienteleid = Clientele.Clienteleid;";
 
-            return testProject;
+                using MySqlCommand cmd = new MySqlCommand(sql, connection);
+                using MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(ConvertReaderToProject(reader));
+                }
+                reader.Close();
+                connection.Close();
+            }
+
+            return result;
         }
 
         [HttpGet("{id}")]
         public Project Get(int id)
         {
-            return testProject.FirstOrDefault(x => x.Clientid == id);
+            return testProject.FirstOrDefault(x => x.Clienteleid == id);
         }
 
         [HttpPost]
@@ -56,15 +59,31 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Project piece)
         {
-            var index = testProject.FindIndex(x => x.Clientid == id);
+            var index = testProject.FindIndex(x => x.Clienteleid == id);
             testProject[index] = piece;
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var piece = testProject.FirstOrDefault(x => x.Clientid == id);
+            var piece = testProject.FirstOrDefault(x => x.Clienteleid == id);
             testProject.Remove(piece);
+        }
+
+        private static Project ConvertReaderToProject(MySqlDataReader reader)
+        {
+            Project project = new Project();
+            project.Projectid = reader.GetInt64("Projectid");
+            project.ProjectName = reader.GetString("ProjectName");
+            project.Clienteleid = reader.GetInt64("Clienteleid");
+            project.SlaOveride = CommonConnection.getNullableLong(reader, "SlaOveride");
+            project.Approval = CommonConnection.getNullableString(reader, "Approval");
+            project.ClienteleName = reader.GetString("ClienteleName");
+            project.RetentionLength = reader.GetInt64("RetentionLength");
+            project.SlaDueDate = reader.GetInt64("SlaDueDate");
+            project.ParentId = CommonConnection.getNullableLong(reader, "ParentId");
+
+            return project;
         }
     }
 }

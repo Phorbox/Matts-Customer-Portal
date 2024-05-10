@@ -22,7 +22,7 @@ namespace backend.Models.Piece
     {
         [J("pieceid")][JsonConverter(typeof(ParseStringConverter))]     public long Pieceid { get; set; }            
         [J("jobid")][JsonConverter(typeof(ParseStringConverter))] public long Jobid { get; set; }        
-        [J("clientid")][JsonConverter(typeof(ParseStringConverter))]    public long Clientid { get; set; }           
+        [J("clienteleid")][JsonConverter(typeof(ParseStringConverter))]    public long Clienteleid { get; set; }           
         [J("Status")]                                                   public string Status { get; set; }           
         [J("Batch Name")]                                               public string BatchName { get; set; }        
         [J("Pages")][JsonConverter(typeof(ParseStringConverter))]       public long Pages { get; set; }              
