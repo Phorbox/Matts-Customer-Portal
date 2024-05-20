@@ -16,7 +16,7 @@ namespace backend.Controllers
     public class JobController : ControllerBase
     {
         static string jsonString = System.IO.File.ReadAllText("../JSON/Job.json");
-        List<Job> testJob = Job.FromJson(jsonString);
+        List<Job> testJob = Job.FromJsonList(jsonString);
 
         [HttpGet]
         public List<Job> Get()
@@ -77,56 +77,56 @@ namespace backend.Controllers
             return result;
         }
 
-        [HttpPost]
-        public int Post([FromBody] string body)
-        {
-            Job job = Job.FromJson(body)[0];
-            if (job.ClienteleName != null)
-            {
-                 HttpClient ClienteleClient = new HttpClient();
-                var ClienteleTask = ClienteleClient.GetAsync("http://proxy/api/clientele");
-                HttpResponseMessage ClienteleResponse = ClienteleTask.Result;
-                List<Clientele> ClienteleList = new List<Clientele>();
-                if (ClienteleResponse.IsSuccessStatusCode)
-                {
-                    Task<string> ClienteleData = ClienteleResponse.Content.ReadAsStringAsync();
-                    string jsonString = ClienteleData.Result;
-                    ClienteleList = Clientele.FromJson(jsonString);
-                    job.Clienteleid = ClienteleList.FirstOrDefault(x => x.ClienteleName == job.ClienteleName).Clienteleid;
-                }
-            }
+        // [HttpPost]
+        // public int Post([FromBody] string body)
+        // {
+        //     Job job = Job.FromJson(body);
+        //     if (job.ClienteleName != null)
+        //     {
+        //          HttpClient ClienteleClient = new HttpClient();
+        //         var ClienteleTask = ClienteleClient.GetAsync("http://proxy/api/clientele");
+        //         HttpResponseMessage ClienteleResponse = ClienteleTask.Result;
+        //         List<Clientele> ClienteleList = new List<Clientele>();
+        //         if (ClienteleResponse.IsSuccessStatusCode)
+        //         {
+        //             Task<string> ClienteleData = ClienteleResponse.Content.ReadAsStringAsync();
+        //             string jsonString = ClienteleData.Result;
+        //             ClienteleList = Clientele.FromJson(jsonString);
+        //             job.Clienteleid = ClienteleList.FirstOrDefault(x => x.ClienteleName == job.ClienteleName).Clienteleid;
+        //         }
+        //     }
 
-            string jobSql =
-                @$"
-                INSERT INTO Job
-                (
-                    Projectid,
-                    Clienteleid,
-                    Inputid,
-                )
-                VALUES
-                (
-                    {job.Projectid},
-                    {job.Clienteleid},
-                    {job.Inputid}
-                );";
+        //     string jobSql =
+        //         @$"
+        //         INSERT INTO Job
+        //         (
+        //             Projectid,
+        //             Clienteleid,
+        //             Inputid,
+        //         )
+        //         VALUES
+        //         (
+        //             {job.Projectid},
+        //             {job.Clienteleid},
+        //             {job.Inputid}
+        //         );";
 
-            string InputSql =
-                @$"
-                INSERT INTO Input
-                (
-                    Filename,
-                    StoragePriority,
-                    InputPdf
-                )
-                VALUES
-                (
-                    '{job.Filename}',
-                    '{job.InputPdf}'
-                );";
+        //     string InputSql =
+        //         @$"
+        //         INSERT INTO Input
+        //         (
+        //             Filename,
+        //             StoragePriority,
+        //             InputPdf
+        //         )
+        //         VALUES
+        //         (
+        //             '{job.Filename}',
+        //             '{job.InputPdf}'
+        //         );";
 
-            return 1;
-        }
+        //     return 1;
+        // }
 
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Job job)

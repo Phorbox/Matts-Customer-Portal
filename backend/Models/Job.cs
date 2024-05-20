@@ -44,12 +44,14 @@ namespace backend.Models.Job
 
     public partial class Job
     {
-        public static List<Job> FromJson(string json) => JsonConvert.DeserializeObject<List<Job>>(json, backend.Models.Job.Converter.Settings);
+        public static Job FromJson(string json) => JsonConvert.DeserializeObject<Job>(json, backend.Models.Job.Converter.Settings);
+    
+        public static List<Job> FromJsonList(string json) => JsonConvert.DeserializeObject<List<Job>>(json, backend.Models.Job.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<Job> self) => JsonConvert.SerializeObject(self, backend.Models.Job.Converter.Settings);
+        public static string ToJson(this Job self) => JsonConvert.SerializeObject(self, backend.Models.Job.Converter.Settings);
     }
 
     internal static class Converter

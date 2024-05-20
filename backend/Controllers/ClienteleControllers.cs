@@ -14,7 +14,7 @@ namespace backend.Controllers
     public class ClienteleController : ControllerBase
     {
         static readonly string jsonString = System.IO.File.ReadAllText("../JSON/Clientele.json");
-        readonly List<Clientele> testClientele = Clientele.FromJson(jsonString);
+        readonly List<Clientele> testClientele = Clientele.FromJsonList(jsonString);
 
         [HttpGet]
         public List<Clientele> Get()

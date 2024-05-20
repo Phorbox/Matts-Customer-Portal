@@ -13,8 +13,31 @@
     List<Project> projectList = (List<Project>)ViewData["ProjectList"];
 
 }
-
 <div class="container">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Upload PDF</title>
+    </head>
+
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="pdfFile">Upload PDF:</label>
+                <input type="file" id="pdfFile" name="pdfFile" accept="application/pdf" />
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+
+        @if (Model.UploadResult != null)
+        {
+            <div>
+                <p>@Model.UploadResult</p>
+            </div>
+        }
+    </body>
+</div>
+@* <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1 class="text-center">Jobs</h1>
@@ -112,3 +135,5 @@
 
             </table>
         </div>
+    </div>
+</div> *@

@@ -14,7 +14,7 @@ namespace backend.Controllers
     public class ProjectController : ControllerBase
     {
         static readonly string jsonString = System.IO.File.ReadAllText("../JSON/Project.json");
-        readonly List<Project> testProject = Project.FromJson(jsonString);
+        readonly List<Project> testProject = Project.FromJsonList(jsonString);
 
         [HttpGet]
         public List<Project> Get()

@@ -27,12 +27,15 @@ namespace backend.Models.Clientele
 
     public partial class Clientele
     {
-        public static List<Clientele> FromJson(string json) => JsonConvert.DeserializeObject<List<Clientele>>(json, backend.Models.Clientele.Converter.Settings);
+        public static Clientele FromJson(string json) => JsonConvert.DeserializeObject<Clientele>(json, backend.Models.Clientele.Converter.Settings);
+    
+        public static List<Clientele> FromJsonList(string json) => JsonConvert.DeserializeObject<List<Clientele>>(json, backend.Models.Clientele.Converter.Settings);
+    
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<Clientele> self) => JsonConvert.SerializeObject(self, backend.Models.Clientele.Converter.Settings);
+        public static string ToJson(this Clientele self) => JsonConvert.SerializeObject(self, backend.Models.Clientele.Converter.Settings);
     }
 
     internal static class Converter

@@ -33,12 +33,14 @@ namespace backend.Models.Piece
 
     public partial class Piece
     {
-        public static List<Piece> FromJson(string json) => JsonConvert.DeserializeObject<List<Piece>>(json, backend.Models.Piece.Converter.Settings);
+        public static Piece FromJson(string json) => JsonConvert.DeserializeObject<Piece>(json, backend.Models.Piece.Converter.Settings);
+    
+        public static List<Piece> FromJsonList(string json) => JsonConvert.DeserializeObject<List<Piece>>(json, backend.Models.Piece.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<Piece> self) => JsonConvert.SerializeObject(self, backend.Models.Piece.Converter.Settings);
+        public static string ToJson(this Piece self) => JsonConvert.SerializeObject(self, backend.Models.Piece.Converter.Settings);
     }
 
     internal static class Converter

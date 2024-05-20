@@ -14,7 +14,7 @@ namespace backend.Controllers
     public class PieceController : ControllerBase
     {
         static string jsonString = System.IO.File.ReadAllText("../JSON/Piece.json");
-        List<Piece> testPiece = Piece.FromJson(jsonString);
+        List<Piece> testPiece = Piece.FromJsonList(jsonString);
 
         [HttpGet]
         public List<Piece> Get()

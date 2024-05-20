@@ -33,12 +33,14 @@ namespace backend.Models.Project
 
     public partial class Project
     {
-        public static List<Project> FromJson(string json) => JsonConvert.DeserializeObject<List<Project>>(json, backend.Models.Project.Converter.Settings);
+        public static Project FromJson(string json) => JsonConvert.DeserializeObject<Project>(json, backend.Models.Project.Converter.Settings);
+   
+        public static List<Project> FromJsonList(string json) => JsonConvert.DeserializeObject<List<Project>>(json, backend.Models.Project.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this List<Project> self) => JsonConvert.SerializeObject(self, backend.Models.Project.Converter.Settings);
+        public static string ToJson(this Project self) => JsonConvert.SerializeObject(self, backend.Models.Project.Converter.Settings);
     }
 
     internal static class Converter
