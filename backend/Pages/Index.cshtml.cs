@@ -117,7 +117,7 @@ public class IndexModel : PageModel
         Input input = new Input { Filename = PdfFile.FileName };
         string inputJson = Models.Input.Serialize.ToJson(input);
 
-        UploadResult += ("\n" + inputJson + "\n");
+        UploadResult += "<br>" + inputJson + "<br>";
 
         using (var client = new HttpClient())
         {

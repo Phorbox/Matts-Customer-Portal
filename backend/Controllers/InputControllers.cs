@@ -75,20 +75,29 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public Input Post([FromBody] string input)
+        public Input Post([FromBody] Input input)
         {
-            var piece = Input.FromJson(input);
-            return piece;
+            // var piece = Input.FromJson(input);
+            var piece = input;
             var result = new Input();
             using (
                 MySqlConnection connection = new MySqlConnection(CommonConnection.connectionString)
             )
             {
                 connection.Open();
+                // string sql =
+                //     $@"  
+                //         INSERT INTO Input (Filename, InputUri)
+                //         VALUES ('{piece.Filename}', '{piece.InputUri});
+
+                //         SELECT *
+                //         FROM Input
+                //         WHERE Inputid = LAST_INSERT_ID();
+                //         ";
                 string sql =
                     $@"  
-                        INSERT INTO Input (Filename, InputUri)
-                        VALUES ('{piece.Filename}', '{piece.InputUri});
+                        INSERT INTO Input (Filename)
+                        VALUES ('{piece.Filename}');
 
                         SELECT *
                         FROM Input
