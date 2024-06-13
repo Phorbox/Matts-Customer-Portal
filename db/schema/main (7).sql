@@ -35,20 +35,43 @@ INSERT INTO
     `ParentId`
   )
 VALUES
-  (1, 'Corpus Christi', 120, 24, NULL),
-  (3, 'Southernpine', 10, 48, NULL),
-  (4, 'Texas Water', 90, 48, NULL),
-  (7, 'Linebarger', 90, 48, NULL),
-  (8, 'I66 Toll', 90, 48, 4),
-  (9, 'Parking Lot Tolls', 90, 48, 4);
+  (1, 'Client1', 120, 24, NULL),
+  (3, 'Client2', 10, 48, NULL),
+  (4, 'Client3', 90, 48, NULL),
+  (7, 'Client4', 90, 48, NULL),
+  (8, 'Client5', 90, 48, 4),
+  (9, 'Client6', 90, 48, 4);
 
 CREATE TABLE `Input` (
   `Inputid` int UNSIGNED NOT NULL,
   `Filename` varchar(255) NOT NULL,
-  `Jobid` int UNSIGNED NOT NULL,
+  `Jobid` int UNSIGNED DEFAULT NULL,
   `StoragePriority` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Cool',
   `InputUri` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+INSERT INTO
+  `Input` (
+    `Inputid`,
+    `Filename`,
+    `Jobid`,
+    `StoragePriority`,
+    `InputUri`
+  )
+VALUES
+  (3, 'mattsLittletTest.zip', NULL, 'Cool', NULL),
+  (4, 'Matttest2.fun', NULL, 'Cool', NULL),
+  (5, 'Matttest2.fun', NULL, 'Cool', NULL),
+  (6, 'test.pdf', NULL, 'Cool', NULL),
+  (7, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (8, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (9, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (10, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (11, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (12, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (13, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (14, 'Weapons.pdf', NULL, 'Cool', NULL),
+  (15, 'Weapons.pdf', NULL, 'Cool', NULL);
 
 CREATE TABLE `Job` (
   `Jobid` int UNSIGNED NOT NULL,
@@ -179,7 +202,7 @@ ALTER TABLE
   `Input`
 MODIFY
   `Inputid` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 3;
+  AUTO_INCREMENT = 16;
 
 ALTER TABLE
   `Job`
