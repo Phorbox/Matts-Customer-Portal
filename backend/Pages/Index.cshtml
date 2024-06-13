@@ -11,6 +11,7 @@
     List<Piece> pieceList = (List<Piece>)ViewData["PieceList"];
     List<Clientele> clienteleList = (List<Clientele>)ViewData["ClienteleList"];
     List<Project> projectList = (List<Project>)ViewData["ProjectList"];
+    var requestMethod = Model.HttpContext.Request.Method;
 
 }
 <div class="container">
@@ -37,103 +38,111 @@
         }
     </body>
 </div>
-@* <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center">Jobs</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        @foreach (PropertyInfo prop in typeof(Job).GetProperties())
-                        {
-                            <th>@prop.Name</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var job in jobList)
-                    {
+
+
+
+@if (requestMethod != "POST")
+{
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Jobs</h1>
+                <table class="table table-striped">
+                    <thead>
                         <tr>
                             @foreach (PropertyInfo prop in typeof(Job).GetProperties())
                             {
-                                <td>@prop.GetValue(job)</td>
+                                <th>@prop.Name</th>
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-12">
-            <h1 class="text-center">Piece</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        @foreach (PropertyInfo prop in typeof(Piece).GetProperties())
+                    </thead>
+                    <tbody>
+                        @foreach (var job in jobList)
                         {
-                            <th>@prop.Name</th>
+                            <tr>
+                                @foreach (PropertyInfo prop in typeof(Job).GetProperties())
+                                {
+                                    <td>@prop.GetValue(job)</td>
+                                }
+                            </tr>
                         }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var piece in pieceList)
-                    {
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <h1 class="text-center">Piece</h1>
+                <table class="table table-striped">
+                    <thead>
                         <tr>
                             @foreach (PropertyInfo prop in typeof(Piece).GetProperties())
                             {
-                                <td>@prop.GetValue(piece)</td>
+                                <th>@prop.Name</th>
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-12">
-            <h1 class="text-center">Clientele</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        @foreach (PropertyInfo prop in typeof(Clientele).GetProperties())
+                    </thead>
+                    <tbody>
+                        @foreach (var piece in pieceList)
                         {
-                            <th>@prop.Name</th>
+                            <tr>
+                                @foreach (PropertyInfo prop in typeof(Piece).GetProperties())
+                                {
+                                    <td>@prop.GetValue(piece)</td>
+                                }
+                            </tr>
                         }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var clientele in clienteleList)
-                    {
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <h1 class="text-center">Clientele</h1>
+                <table class="table table-striped">
+                    <thead>
                         <tr>
                             @foreach (PropertyInfo prop in typeof(Clientele).GetProperties())
                             {
-                                <td>@prop.GetValue(clientele)</td>
+                                <th>@prop.Name</th>
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-12">
-            <h1 class="text-center">Project</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        @foreach (PropertyInfo prop in typeof(Project).GetProperties())
+                    </thead>
+                    <tbody>
+                        @foreach (var clientele in clienteleList)
                         {
-                            <th>@prop.Name</th>
+                            <tr>
+                                @foreach (PropertyInfo prop in typeof(Clientele).GetProperties())
+                                {
+                                    <td>@prop.GetValue(clientele)</td>
+                                }
+                            </tr>
                         }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var project in projectList)
-                    {
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <h1 class="text-center">Project</h1>
+                <table class="table table-striped">
+                    <thead>
                         <tr>
                             @foreach (PropertyInfo prop in typeof(Project).GetProperties())
                             {
-                                <td>@prop.GetValue(project)</td>
+                                <th>@prop.Name</th>
                             }
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+                        @foreach (var project in projectList)
+                        {
+                            <tr>
+                                @foreach (PropertyInfo prop in typeof(Project).GetProperties())
+                                {
+                                    <td>@prop.GetValue(project)</td>
+                                }
+                            </tr>
+                        }
 
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-</div> *@
+}

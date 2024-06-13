@@ -112,12 +112,8 @@ public class IndexModel : PageModel
             await PdfFile.CopyToAsync(stream);
         }
 
-        UploadResult = "Upload successful!";
-
         Input input = new Input { Filename = PdfFile.FileName };
         string inputJson = Models.Input.Serialize.ToJson(input);
-
-        UploadResult += "<br>" + inputJson + "<br>";
 
         using (var client = new HttpClient())
         {
@@ -127,6 +123,7 @@ public class IndexModel : PageModel
             if (response.IsSuccessStatusCode)
             {
                 UploadResult += " Input record created successfully!";
+                UploadResult += response.Content.ReadAsStringAsync().Result;
             }
             else
             {
