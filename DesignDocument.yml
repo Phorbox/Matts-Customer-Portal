@@ -1,11 +1,10 @@
 Portal:
   - Customer Portal:
-      - Short Term:
-          - 1 month
-          - Approvals:
-              - Approve/Reject/Overnight at the piece or job level
+      - Short Term (1 month):
+          - Approvals
+          - Approve/Reject/Overnight at the piece and job level
           - Billing
-            - Reporting
+          - Reporting
           - Work Order Portal
           - User Management
           - IP Restriction/2fa
@@ -23,15 +22,15 @@ Technologies:
   - ASP Dotnet:
       - MySqlConnector
       - Razor Pages
-  - Docker Containers
   - Azure:
       - Container Registry
       - Storage Accounts/Blob Storage
       - Container apps
+  - Docker Containers
   - Mysql
 
 Goals:
-  - maintainable:
+  - Maintainable:
       - Technologies that corporate uses
       - Inhouse/No black boxes
 

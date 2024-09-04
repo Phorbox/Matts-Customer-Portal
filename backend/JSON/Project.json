@@ -5,7 +5,7 @@
       "Clienteleid": 1,
       "SlaOveride": null,
       "Approval": null,
-      "ClienteleName": "Corpus Christi",
+      "ClienteleName": "Company C",
       "RetentionLength": 120,
       "SlaDueDate": 24,
       "ParentId": null
@@ -16,7 +16,7 @@
       "Clienteleid": 1,
       "SlaOveride": null,
       "Approval": null,
-      "ClienteleName": "Corpus Christi",
+      "ClienteleName": "Company C",
       "RetentionLength": 120,
       "SlaDueDate": 24,
       "ParentId": null
@@ -27,7 +27,7 @@
       "Clienteleid": 2,
       "SlaOveride": 20,
       "Approval": "Approval",
-      "ClienteleName": "Corpus Christi",
+      "ClienteleName": "Company C",
       "RetentionLength": 120,
       "SlaDueDate": 24,
       "ParentId": 1
@@ -38,7 +38,7 @@
       "Clienteleid": 2,
       "SlaOveride": null,
       "Approval": "Overnight",
-      "ClienteleName": "Corpus Christi",
+      "ClienteleName": "Company C",
       "RetentionLength": 120,
       "SlaDueDate": 24,
       "ParentId": 2
