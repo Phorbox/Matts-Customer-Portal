@@ -1,0 +1,44 @@
+[
+    {
+      "Clienteleid": 1,
+      "ClienteleName": "Company C",
+      "RetentionLength": 120,
+      "SlaDueDate": 24,
+      "ParentId": null
+    },
+    {
+      "Clienteleid": 2,
+      "ClienteleName": "Company S",
+      "RetentionLength": 10,
+      "SlaDueDate": 48,
+      "ParentId": null
+    },
+    {
+      "Clienteleid": 3,
+      "ClienteleName": "Company TW",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": null
+    },
+    {
+      "Clienteleid": 4,
+      "ClienteleName": "Company L",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": null
+    },
+    {
+      "Clienteleid": 5,
+      "ClienteleName": "Company I",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": 4
+    },
+    {
+      "Clienteleid": 6,
+      "ClienteleName": "Company P",
+      "RetentionLength": 90,
+      "SlaDueDate": 48,
+      "ParentId": 4
+    }
+  ]

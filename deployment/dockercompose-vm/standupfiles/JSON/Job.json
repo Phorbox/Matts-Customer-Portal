@@ -1,0 +1,43 @@
+ [
+      {
+        "Jobid": 1,
+        "Projectid": 1,
+        "Clienteleid": 1,
+        "Inputid": 1,
+        "Status": "received",
+        "DateApproved": null,
+        "DueDate": "2024-05-07 20:55:10",
+        "DateCreated": "2024-05-06 01:56:01",
+        "ProjectName": "statements",
+        "SlaOveride": null,
+        "Approval": "Approval",
+        "ClienteleName": "Company C",
+        "RetentionLength": 120,
+        "SlaDueDate": 24,
+        "ParentId": null,
+        "Filename": "testdel.csv",
+        "StoragePriority": "Cool",
+        "InputPDF": "0x322c322c312c322c50656e64696e6720417070726f76616c2c4e554c4c2c323032342d30352d30372032303a35353a31300d0a332c312c322c332c50726f63657373696e672c4e554c4c2c323032342d30352d30372032303a35353a31300d0a342c322c322c342c50656e64696e6720417070726f76616c2c4e554c4c2c323032342d30352d30372032303a35353a31300d0a352c312c332c352c50726f63657373696e672c4e554c4c2c323032342d30352d30372032303a35353a3130"
+      },
+      {
+        "Jobid": 55,
+        "Projectid": 2,
+        "Clienteleid": 1,
+        "Inputid": 2,
+        "Status": "received",
+        "DateApproved": null,
+        "DueDate": null,
+        "DateCreated": "2024-05-06 01:59:35",
+        "ProjectName": "dqa",
+        "SlaOveride": null,
+        "Approval": "Approval",
+        "ClienteleName": "Company C",
+        "RetentionLength": 120,
+        "SlaDueDate": 24,
+        "ParentId": null,
+        "Filename": "test2.csv",
+        "StoragePriority": "Cool",
+        "InputPDF": "0x322c322c312c322c50656e64696e6720417070726f76616c2c4e554c4c2c323032342d30352d30372032303a35353a31300d0a332c312c322c332c50726f63657373696e672c4e554c4c2c323032342d30352d30372032303a35353a31300d0a342c322c322c342c50656e64696e6720417070726f76616c2c4e554c4c2c323032342d30352d30372032303a35353a31300d0a352c312c332c352c50726f63657373696e672c4e554c4c2c323032342d30352d30372032303a35353a3130"
+      }
+    ]
+

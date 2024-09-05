@@ -18,10 +18,10 @@ namespace backend.Models.Clientele
 
     public partial class Clientele
     {
-        [J("Clienteleid")]     public long Clienteleid { get; set; }    
+        [J("Clienteleid")]     public long? Clienteleid { get; set; }    
         [J("ClienteleName")]   public string ClienteleName { get; set; }
-        [J("RetentionLength")] public long RetentionLength { get; set; }
-        [J("SlaDueDate")]      public long SlaDueDate { get; set; }     
+        [J("RetentionLength")] public long? RetentionLength { get; set; }
+        [J("SlaDueDate")]      public long? SlaDueDate { get; set; }     
         [J("ParentId")]        public long? ParentId { get; set; }      
     }
 

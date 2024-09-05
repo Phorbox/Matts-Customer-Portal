@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Common;
 using backend.Models.Clientele;
+using backend.Models.Job;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
@@ -48,14 +49,20 @@ namespace backend.Controllers
             return testClientele.FirstOrDefault(x => x.Clienteleid == id);
         }
 
-        [HttpGet("name/{name}")]
-        public Clientele GetByName(string name)
-        {
-            int id = Int32.Parse(name);
-            return testClientele.FirstOrDefault(x => x.Clienteleid == id);
-        }
+        // [HttpGet("name/{name}")]
+        // public Clientele GetByName(string name)
+        // {
+      
+        //     return testClientele.FirstOrDefault(x => x.ClienteleName == name);
+        // }
         
 
+        // [HttpPost]
+        // public void Post([FromBody] String body)
+        // {
+        //     Clientele clientele = Clientele.FromJson(body);
+        // }
+        
         [HttpPost]
         public void Post([FromBody] Clientele piece)
         {
@@ -78,12 +85,14 @@ namespace backend.Controllers
 
         private static Clientele ConvertReaderToClientele(MySqlDataReader reader)
         {
-            Clientele clientele = new Clientele();
-            clientele.Clienteleid = reader.GetInt64("Clienteleid");
-            clientele.ClienteleName = reader.GetString("ClienteleName");
-            clientele.RetentionLength = reader.GetInt64("RetentionLength");
-            clientele.SlaDueDate = reader.GetInt64("SlaDueDate");
-            clientele.ParentId = CommonConnection.getNullableLong(reader, "ParentId");
+            Clientele clientele = new Clientele
+            {
+                Clienteleid = reader.GetInt64("Clienteleid"),
+                ClienteleName = reader.GetString("ClienteleName"),
+                RetentionLength = reader.GetInt64("RetentionLength"),
+                SlaDueDate = reader.GetInt64("SlaDueDate"),
+                ParentId = CommonConnection.getNullableLong(reader, "ParentId")
+            };
             return clientele;
         }
     }

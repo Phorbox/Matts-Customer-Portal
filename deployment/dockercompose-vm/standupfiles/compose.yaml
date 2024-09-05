@@ -1,0 +1,64 @@
+services:
+  front:
+    image: phorbox/portal-demo-front:latest
+    container_name: front
+    secrets:
+      - db-password
+    volumes:
+      - ./JSON:/JSON
+    environment:
+      - ASPNETCORE_URLS=http://+:8000
+
+  api:
+    image: phorbox/portal-demo-api:latest
+    container_name: api
+    secrets:
+      - db-password
+    volumes:
+      - ./JSON:/JSON
+    environment:
+      - ASPNETCORE_URLS=http://+:8000
+
+  db:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    secrets:
+      - db-password
+    volumes:
+      - ./schema:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=main
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=db_user_pass
+
+  proxy:
+    image: phorbox/portal-demo-proxy:latest
+    container_name: nginx
+    ports:
+      - 80:80
+    depends_on:
+      - front
+      - api
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: db_user
+      PMA_PASSWORD: db_user_pass
+    restart: always
+    ports:
+      - 1234:80
+
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: secrets/password.txt

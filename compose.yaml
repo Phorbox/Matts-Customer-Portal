@@ -1,5 +1,6 @@
 services:
   front:
+    image: phorbox/portal-demo-front:latest
     container_name: front-container
     build:
       context: backend
@@ -11,6 +12,7 @@ services:
       - ASPNETCORE_URLS=http://+:8000
 
   api:
+    image: phorbox/portal-demo-api:latest
     container_name: api-container
     build:
       context: backend
@@ -37,6 +39,7 @@ services:
       - MYSQL_PASSWORD=db_user_pass
 
   proxy:
+    image: phorbox/portal-demo-proxy:latest
     container_name: nginx-container
     build: proxy
     ports:
