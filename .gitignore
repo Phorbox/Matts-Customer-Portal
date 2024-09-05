@@ -11,6 +11,10 @@
 *.sln.docstates
 .vs
 
+*dockercompose-vm\vm\*
+*dockercompose-vm\standupfiles\secrets\*
+*passwords.txt
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
