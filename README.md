@@ -5,6 +5,8 @@ The application will be available at localhos and the database can be managed at
 
 check out the following endpoints:
 
+
+
 get all records
 
 localhost/api/clientele
@@ -16,6 +18,7 @@ localhost/api/piece
 localhost/api/project
 
 
+
 get single records
 
 localhost/api/clientele/1
@@ -25,6 +28,7 @@ localhost/api/job/1
 localhost/api/piece/1
 
 localhost/api/project/1
+
 
 
 MyPhpAdmin
