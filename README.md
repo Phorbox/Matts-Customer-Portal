@@ -8,6 +8,7 @@ check out the following endpoints:
 get all records
 
 localhost/api/clientele
+
 localhost/api/job
 
 localhost/api/piece
