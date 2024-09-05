@@ -13,7 +13,7 @@
 
 *dockercompose-vm\vm\*
 *dockercompose-vm\standupfiles\secrets\*
-*passwords.txt
+*password.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -353,3 +353,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+deployment/dockercompose-vm/standupfiles/secrets/password.txt
