@@ -1,20 +1,62 @@
+class ImageDeployment {
+    [string]$ImageName
+    [string]$ImageSrc
+    [string]$ImageVersion
 
-$version = 3
 
-docker build -t phorbox/portal-demo-front:$version ./backend/
-docker build -t phorbox/portal-demo-api:$version ./backend/
-docker build -t phorbox/portal-demo-proxy:$version ./proxy/
+    ImageDeployment() { $this.Init(@{}) }
+    ImageDeployment([hashtable]$Properties) { $this.Init($Properties) }
+    ImageDeployment([string]$ImageName, [string]$ImageSrc, [string]$ImageVersion) { 
+        $this.Init(@{
+                ImageName    = $ImageName
+                ImageSrc     = $ImageSrc
+                ImageVersion = $ImageVersion
+            }) 
+    }
 
-docker push phorbox/portal-demo-front:$version
-docker push phorbox/portal-demo-api:$version
-docker push phorbox/portal-demo-proxy:$version
+    [void] Init([hashtable]$Properties) {
+        foreach ($Property in $Properties.Keys) {
+            $this.$Property = $Properties.$Property
+        }
+    }
 
-$version = "latest"
+    [void] build([string]$ImageName, [string]$ImageSrc, [string]$ImageVersion) {
+        docker build -t phorbox/${ImageName}:$ImageVersion ./$ImageSrc/
+    }
+    [void] build() {
+        $this.build($this.ImageName, $this.ImageSrc, $this.ImageVersion)
+    }
+    
+    [void] buildLatest() {
+        $this.build($this.ImageName, $this.ImageSrc, "latest")
+    }
 
-docker build -t phorbox/portal-demo-front:$version ./backend/
-docker build -t phorbox/portal-demo-api:$version ./backend/
-docker build -t phorbox/portal-demo-proxy:$version ./proxy/
+    [void] push([string]$ImageName, [string]$ImageVersion) {
+        docker push phorbox/${ImageName}:$ImageVersion
+    }
+    [void] push() {
+        $this.push($this.ImageName, $this.ImageVersion)
+    }
+    [void] pushLatest() {
+        $this.push($this.ImageName, "latest")
+    }
 
-docker push phorbox/portal-demo-front:$version
-docker push phorbox/portal-demo-api:$version
-docker push phorbox/portal-demo-proxy:$version
+    [void] fullDeployment() {
+        $this.build()
+        $this.buildLatest()
+        $this.push()
+        $this.pushLatest()
+    }
+}
+
+$version = 4
+$front = [ImageDeployment]::new("portal-demo-front", "backend", $version)
+$api = [ImageDeployment]::new("portal-demo-api", "backend", $version)
+$proxy = [ImageDeployment]::new("portal-demo-proxy", "proxy", $version)
+
+$deployments = @($front, $api)
+
+foreach ($currentItemName in $deployments) {
+    echo "Deploying $($currentItemName.ImageName)"
+    $currentItemName.fullDeployment()
+}
