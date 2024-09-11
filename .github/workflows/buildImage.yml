@@ -42,11 +42,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@master
-        with:
-          images: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.image }}
+ ##     - name: Extract metadata (tags, labels) for Docker
+  #      id: meta
+  #      uses: docker/metadata-action@master
+  #      with:
+#          images: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.image }}
 
       - name: Build and push Docker image
         id: push
@@ -55,5 +55,5 @@ jobs:
           context: .
           file: ${{ matrix.dockerfile }}
           push: true
-          tags: ${{ matrix.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.image }}:${{ matrix.tags }}
+          #labels: ${{ steps.meta.outputs.labels }}
