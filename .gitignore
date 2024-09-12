@@ -356,3 +356,4 @@ MigrationBackup/
 deployment/dockercompose-vm/standupfiles/secrets/password.txt
 deployment/dockercompose-vm/vm/parameters.json
 deployment/dockercompose-vm/vm/template.json
+deployment/dockercompose-vm/vm/deploy_key
