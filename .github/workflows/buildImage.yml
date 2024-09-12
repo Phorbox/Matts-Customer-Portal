@@ -51,11 +51,11 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.image }}:${{ matrix.tags }}
 
-      - name: Docker-Compose Remote Deployment
-        uses: alex-ac/github-action-ssh-docker-compose@master
-        with:
-          ssh_host: ${{ secrets.SSH_HOST }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_user: ${{ secrets.SSH_USER }}
-          docker_compose_prefix: matts_com
-          docker_compose_down: 'true'
+#      - name: Docker-Compose Remote Deployment
+#        uses: alex-ac/github-action-ssh-docker-compose@master
+#        with:
+#          ssh_host: ${{ secrets.SSH_HOST }}
+#          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          ssh_user: ${{ secrets.SSH_USER }}
+#          docker_compose_prefix: matts_com
+#          docker_compose_down: 'true'
