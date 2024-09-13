@@ -80,5 +80,6 @@ jobs:
           port: 22
           script: |
             sudo snap install gh
-            sudo gh repo clone Phorbox/Matts-Customer-Portal
-            sudo bash deploy.sh
+            gh repo clone Phorbox/Matts-Customer-Portal
+            docker compose down 
+            docker compose up -d
