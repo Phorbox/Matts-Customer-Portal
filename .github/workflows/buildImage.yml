@@ -51,11 +51,33 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ matrix.image }}:${{ matrix.tags }}
 
-#      - name: Docker-Compose Remote Deployment
-#        uses: alex-ac/github-action-ssh-docker-compose@master
-#        with:
-#          ssh_host: ${{ secrets.SSH_HOST }}
-#          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          ssh_user: ${{ secrets.SSH_USER }}
-#          docker_compose_prefix: matts_com
-#          docker_compose_down: 'true'
+  # deploy_to_server:
+  # name: Deploy to server
+  # runs-on: ubuntu-latest
+  # needs: push_to_registry
+  # steps:
+  #   - name: Docker-Compose Remote Deployment
+  #     uses: alex-ac/github-action-ssh-docker-compose@master
+  #     with:
+  #       ssh_host: ${{ secrets.SSH_HOST }}
+  #       ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #       ssh_user: ${{ secrets.SSH_USER }}
+  #       docker_compose_prefix: matts_com
+  #       docker_compose_down: "true"
+
+  bash-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: deploy.sh
+
